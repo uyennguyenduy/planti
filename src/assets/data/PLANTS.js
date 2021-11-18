@@ -1,27 +1,58 @@
 export const PLANTS = [
   {
     id: 1,
-    name: 'Plant 1',
-    image: '/assets/plant1.jpd'
+    name: 'Ferns 1',
+    category: 'Ferns',
+    description: 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto',
+    image: '../../assets/Images/plant1.jpg'
   },
   {
     id: 2,
-    name: 'Plant 2',
+    name: 'Ferns 2',
+    category: 'Ferns',
+    description: 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto',
     image: '/assets/plant1.jpd'
   },
   {
-    id: 1,
-    name: 'Plant 3',
+    id: 3,
+    name: 'Succulent 1',
+    category: 'Succulents',
+    description: 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto',
     image: '/assets/plant1.jpd'
   },
   {
-    id: 1,
-    name: 'Plant 4',
+    id: 4,
+    name: 'Succulent 2',
+    category: 'Succulents',
+    description: 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto',
     image: '/assets/plant1.jpd'
   },
   {
-    id: 1,
-    name: 'Plant 5',
+    id: 5,
+    name: 'Herb 1',
+    category: 'Herbs',
+    description: 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto',
     image: '/assets/plant1.jpd'
-  }
+  },
+  {
+    id: 6,
+    name: 'Herb 2',
+    category: 'Herbs',
+    description: 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto',
+    image: '/assets/plant1.jpd'
+  },
+  {
+    id: 7,
+    name: 'Flower 1',
+    category: 'Flowers',
+    description: 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto',
+    image: '/assets/plant1.jpd'
+  },
+  {
+    id: 8,
+    name: 'Flower 2',
+    category: 'Flowers',
+    description: 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto',
+    image: '/assets/plant1.jpd'
+  },
 ]

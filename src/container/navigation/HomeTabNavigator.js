@@ -2,6 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FeedStackNavigator } from '../navigation/FeedStackNavigator';
 import { Profile } from '../../component/ProfileScreen/Profile';
+import { SearchScreen } from '../../component/SearchScreen';
 
 
 
@@ -33,12 +34,17 @@ export function HomeTabNavigator() {
         
       />
         <Tab.Screen 
+          name="Search"
+          component={SearchScreen}
+        />
+        <Tab.Screen 
           name="Profile" 
           component={Profile}
           options={{
             title: 'My Garden'
           }}  
         />
+        
     </Tab.Navigator>
   )
 }
