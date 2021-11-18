@@ -3,9 +3,9 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Colors } from "../../theme/colorsTheme";
 import { FontTheme } from "../../theme/fontTheme";
-import { Explore } from "../../component/FeedScreen/Explore";
-import { PostsList } from "../../component/PostsScreen/PostsList";
+import { Explore } from "../../component/ExploreScreen/Explore";
 import { SinglePost } from "../../component/PostsScreen/SinglePost";
+import { AllPosts } from "../../component/PostsScreen/AllPosts";
 
 const Stack = createNativeStackNavigator();
 
@@ -19,7 +19,7 @@ export const FeedStackNavigator = () => {
           headerShown: false
         }}
       />
-      <Stack.Screen name="AllPosts" component={PostsList}
+      <Stack.Screen name="AllPosts" component={AllPosts}
         options={({route}) => ({
           title: route.params.label,
           headerTitleStyle: {

@@ -3,9 +3,9 @@ import { View, Text, FlatList, StyleSheet } from 'react-native';
 import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/core";
 import { selectAllPosts } from "../../redux/reducers/postsSlice";
-import { PostCard } from "./PostCard";
+import { PostCard } from "../../component/PostsScreen/PostCard";
 
-export function PostsList({route}) {
+export function RenderPostCard({route}) {
 
   const nav = useNavigation();
   const { label } = route.params;
@@ -23,17 +23,15 @@ export function PostsList({route}) {
     />)
 
   return (
-    <View style={styles.container}>
- 
-      <FlatList 
-        data={targetedPosts}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-        numColumns={2}
-        columnWrapperStyle={{marginBottom: 20}}
-        initialNumToRender={5}
-      />
-    </View>
+    <FlatList 
+      style={styles.container}
+      data={targetedPosts}
+      renderItem={renderItem}
+      keyExtractor={item => item.id}
+      numColumns={2}
+      columnWrapperStyle={{marginBottom: 20}}
+      initialNumToRender={5}
+    />
   )
 }
 

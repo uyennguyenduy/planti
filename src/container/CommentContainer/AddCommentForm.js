@@ -1,4 +1,3 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { nanoid } from "@reduxjs/toolkit";
 import React, { useState } from "react";
 import { TextInput, View, Button, StyleSheet, Image } from 'react-native';
@@ -7,8 +6,10 @@ import { commentAdded } from "../../redux/reducers/commentsSlice";
 import { Spaces } from "../../theme/spacing";
 import { Colors } from "../../theme/colorsTheme";
 import { FontTheme } from "../../theme/fontTheme";
+
 export const AddCommentForm = ({postId}) => {
-  const [ comment, setComment ] = useState(' ')
+  const [ comment, setComment ] = useState(' ');
+
   const dispatch = useDispatch();
 
   const onAddComment = () => {

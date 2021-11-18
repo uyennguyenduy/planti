@@ -7,21 +7,16 @@ import { Colors } from '../../theme/colorsTheme';
 import { FontTheme } from '../../theme/fontTheme';
 import { Spaces } from '../../theme/spacing';
 import { ReactButtons } from '../ReactionButtons';
-import { AddCommentForm } from '../PostsScreen/AddCommentForm';
-import { CommentMedia } from '../PostsScreen/CommentMedia';
+import { AddCommentForm } from '../../container/CommentContainer/AddCommentForm';
+import { AllComments } from '../../container/CommentContainer/AllComments';
+
 export function SinglePost ({route, navigation}) {
 
   const { postId } = route.params;
 
   const allPosts = useSelector(selectAllPosts);
-  const allComments = useSelector(selectAllComments);
-  const targetedComments = allComments.filter(comment => comment.postId === postId);
   const singlePost = allPosts.filter(item => item.id === postId)[0];
-  
-  const renderItem = ({item}) => (
-    <CommentMedia comment={item}/>
-  )
-
+ 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
@@ -33,9 +28,7 @@ export function SinglePost ({route, navigation}) {
   })
 
   return (
-    <ScrollView style={styles.container}
-      nestedScrollEnabled
-    >
+    <ScrollView style={styles.container}>
       <View>
         <Text style={styles.heading1}>{singlePost.title}</Text>
         <Text style={styles.body}>{singlePost.content}</Text>
@@ -47,16 +40,9 @@ export function SinglePost ({route, navigation}) {
           color={(singlePost.reaction <= 0) ? "gray" : "#008b8b"}
         />
       </View>
-      <View style={styles.commentView}>
-        <FlatList 
-          
-          data={targetedComments}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-          nestedScrollEnabled
-        />
-      </View>
-      <AddCommentForm postId={postId}/>
+      <AllComments postId={postId}/>
+      <AddCommentForm postId={postId} />
+
     </ScrollView>
   )
 }
@@ -72,12 +58,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     marginBottom: Spaces.m1
-  },
-  commentView: {
-    flex: 1,
-    borderTopWidth: 1,
-    borderColor: Colors.primary,
-    padding: Spaces.p2
   },
   heading1: {
     fontWeight: 'bold',
