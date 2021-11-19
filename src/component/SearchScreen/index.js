@@ -5,14 +5,19 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { AllPlants } from '../../container/SearchContainer/allPlants';
 import { Colors } from '../../theme/colorsTheme';
 import { CategoryBar } from './CategoryBar';
+import { useNavigation } from '@react-navigation/core';
+import { Spaces } from '../../theme/spacing';
 
 export function SearchScreen() {
+
+  const nav = useNavigation();
+
   return (
     <ScrollView style={styles.container}>
       <SearchHeader />
       <SearchInput />
       <CategoryBar />
-      <AllPlants />
+      <AllPlants nav={nav}/>
     </ScrollView>
   )
 }
@@ -20,6 +25,7 @@ export function SearchScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.info
+    backgroundColor: Colors.dark,
+    padding: Spaces.p2,
   }
 })

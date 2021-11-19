@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
-import { Colors } from "react-native/Libraries/NewAppScreen";
+import { Colors } from "../../theme/colorsTheme";
 import { useDispatch, useSelector } from "react-redux";
 import { Spaces } from "../../theme/spacing";
 import { selectSearchTerm, setSearchTerm } from "../../redux/reducers/searchTermSlice";
@@ -16,7 +16,7 @@ export function SearchInput() {
       
       <TextInput 
         style={styles.input}
-        placeholder="Type your favorite plant"
+        placeholder="Find your favorite plant"
         defaultValue={searchTerm}
         onChangeText={(term) => handleChangeSearchTerm(term)}
         autoFocus
@@ -27,8 +27,10 @@ export function SearchInput() {
 
 const styles = StyleSheet.create({
   input: {
-    backgroundColor: Colors.primary,
-    color: Colors.light,
+    backgroundColor: Colors.info,
+    color: Colors.primary,
     padding: Spaces.p1,
+    borderRadius: 10,
+    marginBottom: Spaces.m1
   }
 })

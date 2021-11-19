@@ -1,19 +1,28 @@
 import { iteratorSymbol } from 'immer/dist/internal';
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { sortByCategory } from '../../redux/reducers/plantsSlice';
 import { Colors } from '../../theme/colorsTheme';
 import { FontTheme } from '../../theme/fontTheme';
 import { Spaces } from '../../theme/spacing';
 
 export function CategoryBar() {
   const categories = [ "Ferns", "Succulents", "Herbs", "Flowers"]
+  const dispatch = useDispatch();
   
   return (
     <View style={styles.categoryBar}>
       { categories.map((category, id )=> (
-        <Text key={id} style={styles.title}>
-          {category}
-        </Text>
+        <TouchableOpacity
+          key={id}
+          onPress={(category) => dispatch(sortByCategory(category))}
+        >
+          <Text  style={styles.title}>
+            {category}
+          </Text>
+        </TouchableOpacity>
+        
       ))}
     </View>
   )

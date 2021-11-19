@@ -1,13 +1,13 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/core';
 import { selectLivingWithPlantsPosts, selectPlantCarePosts } from '../../redux/reducers/postsSlice';
-import { PostsListFooter } from '../../component/PostsScreen/PostsListFooter';
+import { PostsListFooter } from '../../component/AllPostsScreen/PostsListFooter';
 import { StyleSheet, View, Text, TouchableOpacity, FlatList } from 'react-native';
 import { Spaces } from '../../theme/spacing';
 import { FontTheme } from '../../theme/fontTheme';
 import { Colors } from '../../theme/colorsTheme';
 import { useSelector } from 'react-redux';
-import { PostCard } from '../../component/PostsScreen/PostCard';
+import { PostCard } from '../../component/AllPostsScreen/PostCard';
 
 export function RenderPostList({label}) {
   const nav = useNavigation();
@@ -30,7 +30,7 @@ export function RenderPostList({label}) {
   return (
     <View style={styles.plantCareView}>
       <View style={styles.navView}>
-        <Text style={styles.heading5}>{label}</Text>
+        <Text style={styles.heading}>{label}</Text>
         <TouchableOpacity
           onPress={() => nav.navigate("AllPosts", {label: label})}
         >
@@ -62,9 +62,10 @@ const styles = StyleSheet.create({
     margin: Spaces.m1,
     marginBottom: Spaces.m2
   },
-  heading5: {
-    fontSize: FontTheme.heading5,
-    fontWeight: 'bold'
+  heading: {
+    fontSize: FontTheme.heading4,
+    fontWeight: 'bold',
+    color: Colors.dark
   },
   seeAllBtn: {
     fontSize: FontTheme.heading5,

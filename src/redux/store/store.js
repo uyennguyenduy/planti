@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import usersReducer from '../reducers/usersSlice';
 import postsReducer from '../reducers/postsSlice';
 import commentsReducer from '../reducers/commentsSlice';
@@ -12,5 +12,9 @@ export const store = configureStore({
     comments: commentsReducer,
     plants: plantsReducer,
     searchTerms: searchTermReducer
-  }
+  },
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: false
+    })
 })

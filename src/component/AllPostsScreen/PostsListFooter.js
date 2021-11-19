@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Colors } from '../../theme/colorsTheme';
 import { FontTheme } from '../../theme/fontTheme';
 import { useNavigation } from '@react-navigation/core';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export function PostsListFooter() {
   const nav = useNavigation();
@@ -10,9 +11,13 @@ export function PostsListFooter() {
     <View style={styles.container}>
  
       <TouchableOpacity
-        onPress={() => nav.navigate("Posts")}
+        onPress={() => nav.navigate("AllPosts")}
       >
-        <Text>See More</Text>
+        <Icon name="arrow-forward-outline" style={styles.icon}/>
+        <Text style={styles.btn}>
+          
+          See More
+        </Text>
       </TouchableOpacity>
       
     </View>
@@ -26,9 +31,16 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   icon: {
-    borderRadius: 10,
+    width: 50,
+    borderRadius: 50,
     backgroundColor: Colors.primary,
     color: Colors.light,
     fontSize: FontTheme.heading1
+  }, 
+  btn: {
+    fontSize: FontTheme.title,
+    fontWeight: 'bold',
+    color: Colors.primary
   }
+
 })

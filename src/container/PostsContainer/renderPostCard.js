@@ -3,7 +3,8 @@ import { View, Text, FlatList, StyleSheet } from 'react-native';
 import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/core";
 import { selectAllPosts } from "../../redux/reducers/postsSlice";
-import { PostCard } from "../../component/PostsScreen/PostCard";
+import { PostCard } from "../../component/AllPostsScreen/PostCard";
+import { Colors } from "../../theme/colorsTheme";
 
 export function RenderPostCard({route}) {
 
@@ -38,6 +39,7 @@ export function RenderPostCard({route}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 150
+    paddingTop: 50,
+    backgroundColor: Colors.info
   },
 })

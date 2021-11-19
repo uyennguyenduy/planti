@@ -4,11 +4,11 @@ import { useScrollToTop } from '@react-navigation/native';
 import { Colors } from '../../theme/colorsTheme';
 import { FontTheme } from '../../theme/fontTheme';
 import { Spaces } from '../../theme/spacing';
-import { ExploreHeader } from '../ExploreScreen/ExploreHeader';
-import { ExploreFooter } from '../ExploreScreen/ExploreFooter';
+import { ExploreHeader } from './ExploreHeader';
+import { ExploreFooter } from './ExploreFooter';
 import { RenderPostList } from '../../container/PostsContainer/renderPostList';
 
-export function Explore() {
+export function ExploreScreen() {
 
   const ref = useRef();
   useScrollToTop(ref);

@@ -3,9 +3,13 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Colors } from "../../theme/colorsTheme";
 import { FontTheme } from "../../theme/fontTheme";
-import { Explore } from "../../component/ExploreScreen/Explore";
-import { SinglePost } from "../../component/PostsScreen/SinglePost";
-import { AllPosts } from "../../component/PostsScreen/AllPosts";
+
+import { SinglePost } from "../../component/AllPostsScreen/SinglePost";
+
+import { ExploreScreen } from "../../component/ExploreScreen";
+import { AllPostsScreen } from "../../component/AllPostsScreen";
+
+
 
 const Stack = createNativeStackNavigator();
 
@@ -14,24 +18,24 @@ export const FeedStackNavigator = () => {
     <Stack.Navigator>
       <Stack.Screen 
         name="Explore" 
-        component={Explore}
+        component={ExploreScreen}
         options={{
           headerShown: false
         }}
       />
-      <Stack.Screen name="AllPosts" component={AllPosts}
+      <Stack.Screen name="AllPosts" component={AllPostsScreen}
         options={({route}) => ({
           title: route.params.label,
           headerTitleStyle: {
             fontSize: FontTheme.heading1,
             fontWeight: 'bold',
-            color: Colors.primary
+            color: Colors.dark,
           },
-          headerTransparent: true,
+          headerTransparent: false,
           headerStyle: {
-            borderBottomWidth: 0,
+            backgroundColor: Colors.info,
           },
-          headerTintColor: Colors.primary
+          headerTintColor: Colors.dark
         })}
       />
       <Stack.Group screenOptions={{ presentation: 'modal'}}>
@@ -40,7 +44,10 @@ export const FeedStackNavigator = () => {
           options={{
             title: " ",
             headerBackVisible: false,
-            headerTransparent: false,   
+            headerTransparent: false,
+            headerStyle: {
+              backgroundColor: Colors.info,
+            }   
           }}
 
         />

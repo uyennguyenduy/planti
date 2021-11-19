@@ -1,11 +1,13 @@
 import { nanoid } from "@reduxjs/toolkit";
-import React, { useState } from "react";
-import { TextInput, View, Button, StyleSheet, Image } from 'react-native';
+import React, { useContext, useState } from "react";
+import { TextInput, Text, View, Button, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useDispatch } from "react-redux";
 import { commentAdded } from "../../redux/reducers/commentsSlice";
 import { Spaces } from "../../theme/spacing";
 import { Colors } from "../../theme/colorsTheme";
 import { FontTheme } from "../../theme/fontTheme";
+
+
 
 export const AddCommentForm = ({postId}) => {
   const [ comment, setComment ] = useState(' ');
@@ -20,6 +22,7 @@ export const AddCommentForm = ({postId}) => {
         postId: postId,
         content: comment
       }))
+      setComment("");
     }
   }
   return (
@@ -31,13 +34,10 @@ export const AddCommentForm = ({postId}) => {
       <View style={styles.contentView}>
         <TextInput 
           style={styles.input}
-          placeholderTextColor="black"
           placeholder="Your comment"
           defaultValue={comment}
           onChangeText={(text) => setComment(text)}
-        />
-        <Button title="Add Comment" 
-           onPress={() => onAddComment()}
+          onEndEditing={() => onAddComment()}
         />
       </View>
       
@@ -59,8 +59,8 @@ const styles = StyleSheet.create({
     marginBottom: Spaces.m1
   },
   contentView: {
-    width: '100%',
-    backgroundColor: Colors.secondary,
+    flex: 1,
+    backgroundColor: Colors.muted,
     borderRadius: 10,
     marginLeft: Spaces.m1,
     padding: Spaces.p1
@@ -79,5 +79,8 @@ const styles = StyleSheet.create({
   },
   body: {
     fontSize: FontTheme.body
+  },
+  btn: {
+    color: Colors.primary
   }
 })

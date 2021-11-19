@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     marginBottom: Spaces.m1
   },
   contentView: {
-    backgroundColor: Colors.secondary,
+    backgroundColor: Colors.muted,
     borderRadius: 10,
     marginLeft: Spaces.m1,
     padding: Spaces.p1

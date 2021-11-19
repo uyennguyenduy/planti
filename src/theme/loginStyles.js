@@ -27,7 +27,8 @@ export const styles = StyleSheet.create({
   loginTitle: {
     color: Colors.light,
     fontSize: 25,
-    fontStyle: 'italic'
+    fontStyle: 'italic',
+    textAlign: 'center'
   },
   loginBody: {
     marginTop: 30,
@@ -42,14 +43,16 @@ export const styles = StyleSheet.create({
     textAlign: 'center'
   },
   heading: {
-    color: Colors.light,
+    color: Colors.secondary,
     padding: 10,
     fontSize: FontTheme.heading1,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    textAlign: 'center'
   },
   textBody: {
-    color: Colors.light,
-    fontSize: FontTheme.body
+    color: Colors.secondary,
+    fontSize: FontTheme.body,
+    textAlign: 'center'
   },
   textWarning: {
     color: Colors.warning,
@@ -64,10 +67,12 @@ export const styles = StyleSheet.create({
     marginBottom: 15,
     borderRadius: 3,
     backgroundColor: Colors.primary,
+    textAlign: 'center'
   },
   login: {
     fontSize: 20,
     fontWeight: '500',
-    color: Colors.light
+    color: Colors.light,
+    textAlign: 'center'
   }
 })

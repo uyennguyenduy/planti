@@ -26,13 +26,15 @@ const styles = StyleSheet.create({
     width: 180,
     backgroundColor: Colors.light,
     marginHorizontal: Spaces.m1,
-    borderRadius: 10,
+    borderRadius: 15,
     borderWidth: 1,
-    borderColor: Colors.muted
+    borderColor: Colors.primary,
+    elevation: 25
   },
   title: {
     fontSize: FontTheme.heading5,
-    padding: Spaces.p1
+    padding: Spaces.p1,
+    color: Colors.primary
   },
   image: {
     width: '100%',
