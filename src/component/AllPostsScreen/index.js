@@ -1,20 +1,24 @@
 import React, { useLayoutEffect } from "react";
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { View, Text, FlatList, StyleSheet, ImageBackground } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
-import { RenderPostCard } from "../../container/PostsContainer/renderPostCard";
+import { AllPosts } from "../../container/AllPostsContainer/AllPosts";
 
 export function AllPostsScreen({route, navigation}) {
   return (
-    <>
-      <RenderPostCard route={route}/>
-    </>
+    <ImageBackground
+      source={require('../../assets/Images/bg-plant6.jpg')}
+      resizeMode="cover"
+      style={styles.allPostsView}
+    >
+      <AllPosts route={route}/>
+    </ImageBackground>
     
    
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
+  allPostsView: {
     flex: 1,
   },
 })

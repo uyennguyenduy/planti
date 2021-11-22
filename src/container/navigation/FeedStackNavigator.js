@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Colors } from "../../theme/colorsTheme";
 import { FontTheme } from "../../theme/fontTheme";
 
-import { SinglePost } from "../../component/AllPostsScreen/SinglePost";
+import { SinglePost } from "../../component/SinglePostScreen";
 
 import { ExploreScreen } from "../../component/ExploreScreen";
 import { AllPostsScreen } from "../../component/AllPostsScreen";
@@ -20,6 +20,7 @@ export const FeedStackNavigator = () => {
         name="Explore" 
         component={ExploreScreen}
         options={{
+          title: "Exlore",
           headerShown: false
         }}
       />
@@ -31,9 +32,8 @@ export const FeedStackNavigator = () => {
             fontWeight: 'bold',
             color: Colors.dark,
           },
-          headerTransparent: false,
           headerStyle: {
-            backgroundColor: Colors.info,
+            backgroundColor: Colors.light
           },
           headerTintColor: Colors.dark
         })}
@@ -44,10 +44,7 @@ export const FeedStackNavigator = () => {
           options={{
             title: " ",
             headerBackVisible: false,
-            headerTransparent: false,
-            headerStyle: {
-              backgroundColor: Colors.info,
-            }   
+            headerTransparent: true
           }}
 
         />

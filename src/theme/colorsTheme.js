@@ -1,9 +1,10 @@
 export const Colors = {
   primary: '#5f9ea0',
-  secondary: '#ffe4c4',
+  secondary: '#fff4e6',
   body: '',
   dark: '#008b8b',
-  light: 'white',
+  light: '#f0ffff',
+  //actions
   info: '#f0ffff',
   success: '',
   warning: '#ffa07a',
@@ -12,4 +13,3 @@ export const Colors = {
   
 
 }
-//color hightlight

@@ -1,12 +1,13 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FeedStackNavigator } from '../navigation/FeedStackNavigator';
-import { Profile } from '../../component/ProfileScreen/Profile';
 import { SearchScreen } from '../../component/SearchScreen';
 import { PlantDetailScreen } from '../../component/PlantDetailScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Colors } from '../../theme/colorsTheme';
 import { FontTheme } from '../../theme/fontTheme';
+import { ProfileScreen } from '../../component/ProfileScreen';
+
 
 
 const Tab = createBottomTabNavigator();
@@ -38,7 +39,10 @@ export function HomeTabNavigator() {
         <Tab.Screen 
         name="Feed" 
         component={FeedStackNavigator}
-        
+        options={{
+          title: "Explore"
+        }}
+      
       />
         <Tab.Screen 
           name="Search"
@@ -46,20 +50,24 @@ export function HomeTabNavigator() {
         />
         <Tab.Screen 
           name="Profile" 
-          component={Profile}
+          component={ProfileScreen}
           options={{
             title: 'My Garden'
           }}  
         />
-        <Tab.Screen name="PlantDetail" 
+        <Tab.Group screenOptions={{ presentation: "modal"}}>
+          <Tab.Screen name="PlantDetail" 
             component={PlantDetailScreen}
-            options={{
-              title: " ",
+            options={({route}) => ({
+              title: '',
+              headerShown: true,
+              headerTransparent: true,
               tabBarButton: (props) => null,
               
-            }}
-            
+            })}
         />
+        </Tab.Group>
+        
         
 
     </Tab.Navigator>

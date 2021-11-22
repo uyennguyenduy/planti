@@ -3,8 +3,8 @@ export const PLANTS = [
     id: 1,
     name: 'Ferns 1',
     category: 'Ferns',
-    featured: true,
-    description: 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto',
+    featured: false,
+    description: 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum',
     image: '../../assets/Images/plant1.jpg'
   },
   {
@@ -12,7 +12,7 @@ export const PLANTS = [
     name: 'Ferns 2',
     category: 'Ferns',
     featured: false,
-    description: 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto',
+    description: 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum',
     image: '/assets/plant1.jpd'
   },
   {
@@ -20,7 +20,7 @@ export const PLANTS = [
     name: 'Succulent 1',
     category: 'Succulents',
     featured: false,
-    description: 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto',
+    description: 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum',
     image: '/assets/plant1.jpd'
   },
   {
@@ -28,7 +28,7 @@ export const PLANTS = [
     name: 'Succulent 2',
     category: 'Succulents',
     featured: false,
-    description: 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto',
+    description: 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum',
     image: '/assets/plant1.jpd'
   },
   {
@@ -36,7 +36,7 @@ export const PLANTS = [
     name: 'Herb 1',
     category: 'Herbs',
     featured: false,
-    description: 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto',
+    description: 'quia et suscipit suscipit recusandae consequuntur expedita et cum quia et suscipit suscipit recusandae consequuntur expedita et cum',
     image: '/assets/plant1.jpd'
   },
   {
@@ -44,7 +44,7 @@ export const PLANTS = [
     name: 'Herb 2',
     category: 'Herbs',
     featured: false,
-    description: 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto',
+    description: 'quia et suscipit suscipit recusandae consequuntur expedita et cum quia et suscipit suscipit recusandae consequuntur expedita et cum',
     image: '/assets/plant1.jpd'
   },
   {
@@ -52,7 +52,7 @@ export const PLANTS = [
     name: 'Flower 1',
     category: 'Flowers',
     featured: false,
-    description: 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto',
+    description: 'quia et suscipit suscipit recusandae consequuntur expedita et cum quia et suscipit suscipit recusandae consequuntur expedita et cum',
     image: '/assets/plant1.jpd'
   },
   {
@@ -60,7 +60,7 @@ export const PLANTS = [
     name: 'Flower 2',
     category: 'Flowers',
     featured: false,
-    description: 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto',
+    description: 'quia et suscipit suscipit recusandae consequuntur expedita et cum quia et suscipit suscipit recusandae consequuntur expedita et cum',
     image: '/assets/plant1.jpd'
   },
 ]

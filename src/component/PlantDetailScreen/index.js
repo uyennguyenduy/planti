@@ -1,7 +1,7 @@
 import React, { useLayoutEffect } from "react";
 import { useNavigation } from "@react-navigation/core";
-import { View, TouchableOpacity, Text, StyleSheet, Button } from "react-native";
-import { SinglePlant } from "./SinglePlant";
+import { View, TouchableOpacity, Text, StyleSheet, Button, ScrollView } from "react-native";
+import { PlantDetails } from "./PlantDetails";
 import Icon from "react-native-vector-icons/Ionicons";
 import { Colors } from "../../theme/colorsTheme";
 import { Spaces } from "../../theme/spacing";
@@ -11,46 +11,31 @@ import { FontTheme } from "../../theme/fontTheme";
 
 export function PlantDetailScreen({route, navigation}) {
 
-/*
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
         <TouchableOpacity
-          onPress={() => navigation.navigate("Search")}
+          onPress={() => navigation.jumpTo("Search")}
         >
-          <Icon name="close" size={35} color="black"/>
+          <Icon name="close" size={35} color="white"/>
         </TouchableOpacity>
       )
     })
   })
-  */
+  
   
   return (
-    <View style={styles.container}>
-      <SinglePlant route={route}/>
-      <View style={styles.navView}>
-        
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-        >
-        <Text style={styles.backBtn}>
-        <Icon name="chevron-back-sharp" size={25} color='black'/> 
-          Back
-        </Text>
-        </TouchableOpacity>
-     
-        
+    <ScrollView style={styles.container}>
+      <PlantDetails route={route}/>
       
-      </View>
-      
-    </View>
+    </ScrollView>
   )
 }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.info,
-    padding: Spaces.p3
+    backgroundColor: Colors.primary,
   },
   navView: {
     flex: 1,

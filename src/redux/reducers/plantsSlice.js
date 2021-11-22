@@ -1,21 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { PLANTS } from '../../assets/data/PLANTS';
 import { selectSearchTerm } from './searchTermSlice';
+import { selectSortTerms } from './sortsSlice';
 
 export const plantsSlice = createSlice({
   name: 'plants',
   initialState: PLANTS,
   reducers: {
-    sortByCategory: (state, action) => {
-      const {cate} = action.payload;
-      console.log(cate);
-      state.find((plant) => plant.category === cate);
-    },
     setFavoritePlant: (state, action) => {
       const { id } = action.payload;
       const existingPlant = state.find(plant => plant.id === id);
       if (existingPlant) {
-        existingPlant.featured = true;
+        existingPlant.featured = !existingPlant.featured;
+      }
+    },
+    deleteFavoritePlant: (state, action) => {
+      const { id } = action.payload;
+      const existingPlant = state.find(plant => plant.id === id);
+      if (existingPlant) {
+        existingPlant.featured = false;
       }
     }
   }
@@ -27,11 +30,15 @@ export const selectFilteredPlant = state => {
   
   const allPlants = selectAllPlants(state);
   const searchTerm = selectSearchTerm(state);
-
-  return allPlants.filter((plant) => 
-  plant.name.toLowerCase().includes(searchTerm.toLowerCase()));
+  const sortTerm = selectSortTerms(state);
+  console.log(sortTerm);
+  const categorizedPlants = (sortTerm) 
+  ? allPlants.filter(plant => plant.category.toLowerCase() === sortTerm.toLowerCase())
+  : allPlants;
+  return categorizedPlants.filter((plant) => 
+  plant.name.toLowerCase().includes(searchTerm.toLowerCase()))
 }
 
-export const { sortByCategory, setFavoritePlant } = plantsSlice.actions;
+export const { setFavoritePlant, deleteFavoritePlant } = plantsSlice.actions;
 
 export default plantsSlice.reducer;

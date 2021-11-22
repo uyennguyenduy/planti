@@ -1,24 +1,24 @@
 import React from "react";
 import { View, Image, Text, StyleSheet, BackHandler } from "react-native";
-import plantsSlice from "../redux/reducers/plantsSlice";
-import { Colors } from "../theme/colorsTheme";
-import { FontTheme } from "../theme/fontTheme";
-import { Spaces } from "../theme/spacing";
-import Icon from 'react-native-vector-icons/Ionicons';
+import { Colors } from "../../../theme/colorsTheme";
+import { FontTheme } from "../../../theme/fontTheme";
+import { Spaces } from "../../../theme/spacing";
 
-export function PlantCard({plant, backgroundColor}) {
+
+
+export function PlantCard({plant, children}) {
   return (
-    <View style={[styles.plantCard, {backgroundColor}]}>
+    <View style={styles.plantCard}>
       <Image 
         style={styles.img}
-        source={require('../assets/Images/plant1.jpg')}
+        source={require('../../../assets/Images/plant1.jpg')}
         resizeMode="cover"
       />
       <View style={styles.plantCardBody}>
         <Text style={styles.title}>{plant.name}</Text>
         <Text style={styles.subTitle}>{plant.description}</Text>
       </View>
-      <Icon name="chevron-forward-sharp" style={styles.title}/>
+      {children}
     </View>
   )
 };
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   },
   title: {
     color: Colors.secondary,
-    fontSize: FontTheme.title,
+    fontSize: FontTheme.heading4,
     fontWeight: 'bold'
   },
   subTitle: {

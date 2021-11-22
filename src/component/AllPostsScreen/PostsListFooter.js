@@ -8,10 +8,10 @@ import Icon from 'react-native-vector-icons/Ionicons';
 export function PostsListFooter() {
   const nav = useNavigation();
   return (
-    <View style={styles.container}>
- 
+    <>
       <TouchableOpacity
         onPress={() => nav.navigate("AllPosts")}
+        style={styles.container}
       >
         <Icon name="arrow-forward-outline" style={styles.icon}/>
         <Text style={styles.btn}>
@@ -20,7 +20,7 @@ export function PostsListFooter() {
         </Text>
       </TouchableOpacity>
       
-    </View>
+    </>
   )
 }
 
@@ -32,15 +32,17 @@ const styles = StyleSheet.create({
   },
   icon: {
     width: 50,
+    height: 50,
+    textAlign: 'center',
     borderRadius: 50,
-    backgroundColor: Colors.primary,
-    color: Colors.light,
+    backgroundColor: Colors.light,
+    color: Colors.primary,
     fontSize: FontTheme.heading1
   }, 
   btn: {
     fontSize: FontTheme.title,
     fontWeight: 'bold',
-    color: Colors.primary
+    color: Colors.light
   }
 
 })

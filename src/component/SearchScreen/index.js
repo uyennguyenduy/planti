@@ -13,12 +13,15 @@ export function SearchScreen() {
   const nav = useNavigation();
 
   return (
-    <ScrollView style={styles.container}>
-      <SearchHeader />
-      <SearchInput />
-      <CategoryBar />
-      <AllPlants nav={nav}/>
-    </ScrollView>
+    <View style={styles.container}>
+  
+        <SearchHeader />
+  
+      <ScrollView style={styles.bodyView}>
+        <AllPlants nav={nav}/>
+      </ScrollView>
+      
+    </View>
   )
 }
 
@@ -26,6 +29,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.dark,
-    padding: Spaces.p2,
+ 
+  },
+  bodyView: {
+    flex: 2,
+    paddingHorizontal: Spaces.p2
   }
 })

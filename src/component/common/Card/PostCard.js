@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import { Colors } from '../../theme/colorsTheme';
-import { FontTheme } from '../../theme/fontTheme';
-import { Spaces } from '../../theme/spacing';
+import { Colors } from '../../../theme/colorsTheme';
+import { FontTheme } from '../../../theme/fontTheme';
+import { Spaces } from '../../../theme/spacing';
 
 export function PostCard({post, onPress}) {
   return (
@@ -12,7 +12,7 @@ export function PostCard({post, onPress}) {
       <View style={styles.item}>
         <Image 
           style={styles.image}
-          source={require('../../assets/Images/post1.jpg')}
+          source={require('../../../assets/Images/post1.jpg')}
           resizeMode='cover'
         />
         <Text style={styles.title}>{post.title}</Text>

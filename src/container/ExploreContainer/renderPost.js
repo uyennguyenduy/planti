@@ -7,16 +7,16 @@ import { Spaces } from '../../theme/spacing';
 import { FontTheme } from '../../theme/fontTheme';
 import { Colors } from '../../theme/colorsTheme';
 import { useSelector } from 'react-redux';
-import { PostCard } from '../../component/AllPostsScreen/PostCard';
+import { PostCard } from '../../component/common/Card/PostCard';
 
-export function RenderPostList({label}) {
+export function RenderPost({label}) {
   const nav = useNavigation();
 
   const plantCarePosts = useSelector(selectPlantCarePosts);
   const livingWithPlantsPosts = useSelector(selectLivingWithPlantsPosts);
 
-  const targetedData = (label = 'Plant Care') ? plantCarePosts : 
-    (label = 'Living With Plants') ? livingWithPlantsPosts : null
+  const targetedData = (label === 'Plant Care') ? plantCarePosts : 
+    (label === 'Living With Plants') ? livingWithPlantsPosts : null
 
   const renderItem = ({item}) => (
     <PostCard 
@@ -65,11 +65,11 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: FontTheme.heading4,
     fontWeight: 'bold',
-    color: Colors.dark
+    color: Colors.light
   },
   seeAllBtn: {
     fontSize: FontTheme.heading5,
     fontWeight: '500',
-    color: Colors.primary
+    color: Colors.light
   }
 })

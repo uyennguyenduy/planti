@@ -3,10 +3,10 @@ import { View, Text, FlatList, StyleSheet } from 'react-native';
 import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/core";
 import { selectAllPosts } from "../../redux/reducers/postsSlice";
-import { PostCard } from "../../component/AllPostsScreen/PostCard";
+import { PostCard } from "../../component/common/Card/PostCard";
 import { Colors } from "../../theme/colorsTheme";
 
-export function RenderPostCard({route}) {
+export function AllPosts({route}) {
 
   const nav = useNavigation();
   const { label } = route.params;
@@ -40,6 +40,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 50,
-    backgroundColor: Colors.info
   },
 })

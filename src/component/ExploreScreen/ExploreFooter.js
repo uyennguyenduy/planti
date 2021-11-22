@@ -37,13 +37,13 @@ const styles = StyleSheet.create({
   },
   heading4: {
     fontSize: FontTheme.heading4,
-    color: Colors.dark,
+    color: Colors.secondary,
     fontWeight: 'bold',
     textAlign: 'center',
   },
   body: {
     fontSize: FontTheme.body,
-    color: Colors.primary,
+    color: Colors.light,
     textAlign: 'center',
   },
   icon: {

@@ -7,30 +7,21 @@ import { Spaces } from '../../theme/spacing';
 import { ExploreHeader } from './ExploreHeader';
 import { ExploreFooter } from './ExploreFooter';
 import { RenderPostList } from '../../container/PostsContainer/renderPostList';
+import { LinearBackground } from '../common/Background/LinearBackground';
+import { ExploreBody } from './ExploreBody';
 
-export function ExploreScreen() {
+export function ExploreScreen({navigation}) {
 
   const ref = useRef();
   useScrollToTop(ref);
   
   return (
     <ScrollView style={styles.container} ref={ref}>
-      <ExploreHeader />
-      <RenderPostList label="Plant Care"/>
-
-      <View style={styles.plantWeekView}>
-        <ImageBackground 
-          style={styles.img}
-          source={require('../../assets/Images/plant3.jpg')}
-          resizeMode="cover"
-        >
-          <Text style={styles.title}>Plant of Week</Text>
-          <Text style={styles.subtitle}>MOSTERA PLANT</Text>
-        </ImageBackground>
-      </View>
-
-      <RenderPostList label="Living With Plants"/>
-      <ExploreFooter />
+      <LinearBackground 
+        headerComponent={<ExploreHeader/>}
+        bodyComponent={<ExploreBody nav={navigation}/>}
+        imgSource={require('../../assets/Images/bg-plant.jpg')}
+      />
     </ScrollView>
   )
 }
