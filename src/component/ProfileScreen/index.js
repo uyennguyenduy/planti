@@ -15,7 +15,7 @@ export function ProfileScreen({navigation}) {
       > 
         <ProfileHeader/>
         <LinearGradient 
-          colors={['rgba(240, 255, 255,0)', 'rgb(95, 158, 160)','rgb(0, 139, 139)' ]}
+          colors={['rgba(240, 255, 255,0)', 'rgb(95, 158, 160)','rgba(0, 139, 139, 1)' ]}
           locations={[0.1, 0.5, 1]}
         > 
           <ProfileBody nav={navigation}/>
@@ -29,19 +29,9 @@ export function ProfileScreen({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    
   },
   screenBackground: {
     flex: 1,
-    justifyContent: 'flex-start',
+  
   },
-  circleView: {
-    position: 'absolute',
-    top: -120,
-    left: -30,
-    width: 450,
-    height: 450,
-    borderRadius: 250,
-    backgroundColor: 'rgba(0,0,0,0.3)',
-  }
 })

@@ -42,7 +42,7 @@ export function ProfileHeader() {
 
 const styles = StyleSheet.create({
   headerView: {
-    flex: 1,
+    flex: 0.5,
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: Spaces.m4,

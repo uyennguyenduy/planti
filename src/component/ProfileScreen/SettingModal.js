@@ -10,25 +10,31 @@ export function SettingModal({modalVisible, onClosePress}) {
 
   const { signOut } = useContext(AuthContext).authContext;
   return (
-    <>
+    
       <Modal
         animationType="fade"
         transparent={true}
         visible={modalVisible}
       > 
-        <TouchableWithoutFeedback onPress={onClosePress}>
-        <View style={styles.modalView}>
-          <View style={styles.modalLayout}>
-            <TouchableHighlight
-              onPress={() => signOut()}
-            >
-              <Text style={styles.modalBtn}>Log out</Text>
-            </TouchableHighlight>
+      <TouchableWithoutFeedback
+        onPress={onClosePress}
+      >
+       
+        <View style={{flex: 1}}>
+          <View style={styles.modalView}>
+            <View style={styles.modalLayout}>
+              <TouchableHighlight
+                onPress={() => signOut()}
+              >
+                <Text style={styles.modalBtn}>Log out</Text>
+              </TouchableHighlight>
+            </View>
           </View>
         </View>
-        </TouchableWithoutFeedback>
+       
+      </TouchableWithoutFeedback>
       </Modal>
-    </>
+    
   )
 }
 

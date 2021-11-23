@@ -27,7 +27,7 @@ export function ProfileBody({nav}) {
 
 const styles = StyleSheet.create({
   profileBodyView: {
-    flex: 3,
+    flex: 1,
     justifyContent: 'flex-start',
     paddingHorizontal: Spaces.p2,
     paddingTop: Spaces.m4,

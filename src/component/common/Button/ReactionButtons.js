@@ -3,7 +3,7 @@ import { Text, TouchableOpacity } from "react-native";
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import { useDispatch } from "react-redux";
-import { reactionAdded } from "../redux/reducers/postsSlice";
+import { reactionAdded } from "../../../redux/reducers/postsSlice";
 
 export function ReactButtons({post, color}) {
   const dispatch = useDispatch();

@@ -6,7 +6,7 @@ import { selectAllComments } from '../../redux/reducers/commentsSlice';
 import { Colors } from '../../theme/colorsTheme';
 import { FontTheme } from '../../theme/fontTheme';
 import { Spaces } from '../../theme/spacing';
-import { ReactButtons } from '../ReactionButtons';
+import { ReactButtons } from '../common/Button/ReactionButtons';
 import { AddCommentForm } from '../../container/SinglePostContainer/AddCommentForm';
 import { AllComments } from '../../container/SinglePostContainer/AllComments';
 
