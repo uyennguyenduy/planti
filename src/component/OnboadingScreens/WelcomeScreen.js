@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import { ImageBackground, Text, TouchableOpacity, View, StyleSheet } from 'react-native';
 import { Colors } from '../../theme/colorsTheme';
 
-export function Welcome() {
+export function WelcomeScreen() {
   const nav = useNavigation();
   return(
     <View style={styles.container}>

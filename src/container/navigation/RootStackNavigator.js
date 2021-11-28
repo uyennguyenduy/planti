@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
+import { View, ActivityIndicator } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AuthContext } from '../../../App.js';
-import { Loading } from '../../component/LoginScreens/Loading.js';
-import { Welcome } from '../../component/LoginScreens/Welcome.js.js';
-import { Login } from '../../component/LoginScreens/Login';
-import { Signup } from '../../component/LoginScreens/Signup';
-import { Recovery } from '../../component/LoginScreens/Recovery';
 import { HomeTabNavigator } from './HomeTabNavigator';
+import { WelcomeScreen } from '../../component/OnboadingScreens/WelcomeScreen.js';
+import { LoginScreen } from '../../component/OnboadingScreens/LoginScreen/index';
+import { SignupScreen } from '../../component/OnboadingScreens/SignupScreen/index.js';
+import { RecoveryScreen } from '../../component/OnboadingScreens/RecoveryScreen/index.js';
 
 
 
@@ -16,7 +16,9 @@ export const RootStackNavigator = () => {
   const { state } = useContext(AuthContext);
   if ( state.isLoading ) {
     return (
-      <Loading/>
+      <View>
+        <ActivityIndicator size="large"/>
+      </View>
     )
   }
   return (
@@ -33,14 +35,14 @@ export const RootStackNavigator = () => {
     >
       { state.userToken == null ? (
         <>
-          <Stack.Screen name="Welcome" component={Welcome}
+          <Stack.Screen name="Welcome" component={WelcomeScreen}
             options={{
               headerShown: false,
             }}
           />
-          <Stack.Screen name="Login" component={Login}/>
-          <Stack.Screen name="Signup" component={Signup}/>
-          <Stack.Screen name="Recovery" component={Recovery}/>
+          <Stack.Screen name="Login" component={LoginScreen}/>
+          <Stack.Screen name="Signup" component={SignupScreen}/>
+          <Stack.Screen name="Recovery" component={RecoveryScreen}/>
         </>
       ) : (
         <>
