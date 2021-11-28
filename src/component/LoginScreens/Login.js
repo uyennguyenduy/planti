@@ -10,8 +10,8 @@ export function Login() {
 
   const { signIn } = useContext(AuthContext).authContext;
   const [ data, setData ] = useState({
-    username: '',
-    password: '',
+    username: 'user1',
+    password: 'password1',
     message: '',
     check_textInputChange: false,
     isValidUser: true,

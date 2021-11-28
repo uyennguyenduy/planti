@@ -7,6 +7,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Colors } from '../../theme/colorsTheme';
 import { FontTheme } from '../../theme/fontTheme';
 import { ProfileScreen } from '../../component/ProfileScreen';
+import { FirebaseScreen } from '../../component/FirebaseScreen';
 
 
 
@@ -37,8 +38,8 @@ export function HomeTabNavigator() {
       }
     >
         <Tab.Screen 
-        name="Feed" 
-        component={FeedStackNavigator}
+        name="Firebase" 
+        component={FirebaseScreen}
         options={{
           title: "Explore"
         }}
