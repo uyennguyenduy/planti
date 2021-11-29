@@ -3,71 +3,92 @@ import {  View, Alert, TextInput, Text, TouchableOpacity, ImageBackground} from 
 import { AuthContext } from '../../../../App';
 import { styles } from '../../../theme/loginStyles';
 import { USERS } from '../../../assets/data/USERS'
+import { LoadingScreen } from '../../LoadingScreen';
+import { signinUser } from '../../../service/authUser';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export function LoginForm({nav}) {
 
 
   const { signIn } = useContext(AuthContext).authContext;
   const [ data, setData ] = useState({
-    username: 'user1',
-    password: 'password1',
-    message: '',
+    email: '',
+    password: '',
     check_textInputChange: false,
-    isValidUser: true,
-    isValidPassword: true
+    emailError: '',
+    passwordError: '',
+    isLoading: false
   });
   
-  const passwordInputChange = (val) => {
-    if (val.trim().length > 6) {
+  const onEmailChange = (email) => {
+    let regex = '';
+    if (email.length === 0) {
       setData({
         ...data,
-        password: val,
-        check_textInputChange: true,
-        isValidPassword: true
-      });
+        email,
+        emailError: 'Email cannot be empty'
+      })
     } else {
       setData({
         ...data,
-        password: val,
-        check_textInputChange: false,
-        isValidPassword: false
-      });
+        email,
+        emailError: ''
+      })
     }
   }
-  const handleValidPassword = (val) => {
-    if (val.trim().length > 4) {
+  const onPasswordChange = (password) => {
+    if (password.length === 0) {
       setData({
         ...data,
-        isValidPassword: true
-      });
+        password,
+        passwordError: "Password cannot be empty!"
+      })
+    } else if (password.length < 6) {
+      setData({
+        ...data,
+        password,
+        passwordError: "Password must be 6 or more digit"
+      })
     } else {
       setData({
         ...data,
-        isValidPassword: false
-      });
+        password,
+        passwordError: ''
+      })
     }
   }
-  const handleLogin = (userName, password) => {
-    const foundUser = USERS.filter(item => {
-      return userName === item.username && password === item.password;
+  
+
+  const signInCallback = async (response) => {
+    setData({
+      ...data,
+      isLoading: false
+    })
+    console.log('response: ', response)
+    if (response.result === 'success') {
+      await AsyncStorage.setItem('user', JSON.stringify(response.user))
+      nav.navigate("Home")
+    } else {
+      Alert.alert("Error Signing in", response.error, [
+        {text: "OK"}
+      ])
+    }
+  }
+
+  const login = () => {
+    setData({
+      ...data,
+      isLoading: true
     });
-    if ( data.username.length === 0 || data.password.length === 0) {
-      Alert.alert('Wrong Input!', 'Username or password cannot be empty', [
-        {text: 'Ok'}
-      ]);
-      alert("Wrong Input!', 'Username or password cannot be empty");
-      return;
-    };
-    if ( foundUser.length === 0) {
-      Alert.alert('Invalid User!', 'Username or password is incorrect', [
-        {text: 'Ok'}
-      ]);
-      alert("Invalid User!', 'Username or password is incorrect")
-      return;
-    };
-    
-    signIn(foundUser);
+    signinUser(data.email, data.password, signInCallback)
   }
+
+  if (data.isLoading) {
+    return (
+      <LoadingScreen />
+    )
+  }
+
   return(
    
     <View style={styles.loginForm}>
@@ -75,32 +96,30 @@ export function LoginForm({nav}) {
         <View style={styles.loginBody}>
           <TextInput
             style={styles.loginInput}
-            placeholder="Email or username"
+            placeholder="Email"
             placeholderTextColor="#008b8b"
-            defaultValue={data.username}
+            defaultValue={data.email}
             autoFocus={true}
-            onChangeText={(text) => setData({...data, username: text})}
+            onChangeText={(email) => onEmailChange(email)}
           />
-      
+          <Text style={styles.textWarning}>{data.emailError && data.emailError}</Text>
           <TextInput
             style={styles.loginInput}
             placeholder="Password"
             placeholderTextColor="#008b8b"
             defaultValue={data.password}
             secureTextEntry={true}
-            onChangeText={(val) => passwordInputChange(val)}
-            onEndEditing={(e) => handleValidPassword(e.nativeEvent.text)}
+            onChangeText={(password) => onPasswordChange(password)}
           />
-            { data.isValidPassword ? null : 
-              <Text style={[styles.textWarning, {fontStyle: 'italic'} ]}>
-                Password must be more than 6 characters long
-              </Text>
-            }
+          <Text style={styles.textWarning}>{data.passwordError && data.password12345Error}</Text>
         </View>
             
         <TouchableOpacity 
+          disabled={data.email.length === 0 || data.password.length === 0 || 
+            data.emailError || data.passwordError
+          }
           style={styles.loginBtn}
-          onPress={() => handleLogin(data.username, data.password)}
+          onPress={login}
         >
           <Text style={styles.login}>LOGIN</Text>
         </TouchableOpacity>

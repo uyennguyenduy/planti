@@ -4,7 +4,7 @@ import {  View, TextInput, Text, TouchableOpacity, ImageBackground} from 'react-
 import { styles } from '../../../theme/loginStyles';
 import { SignupForm } from './SignupForm';
 
-export function SignupScreen() {
+export function SignupScreen({navigation}) {
 
 
   return(
@@ -21,7 +21,7 @@ export function SignupScreen() {
           </Text>
         </View>
         
-        <SignupForm/>
+        <SignupForm nav={navigation}/>
 
         <View style={styles.footer}>
           <Text style={styles.textBody}>

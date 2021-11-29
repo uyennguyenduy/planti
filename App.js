@@ -10,23 +10,22 @@ import { Text, View } from "react-native";
 
 export const AuthContext = createContext();
 
-function App() {
+function App({navigation}) {
   const [ state, dispatch ] = useReducer(usersReducer, initialUsersState);
   
-  useEffect(() => {
-    setTimeout(async() => {
-      let userToken;
-      userToken = null;
-      try {
-        await AsyncStorage.getItem('userToken')
-      } catch(err) {
-        console.log(err)
-      }
-      //console.log(' user token: ', userToken);
-      dispatch({type: 'REGISTER', token: userToken})
-    }, 1000);
-  }, []);
-
+  // useEffect(() => {
+  //   setTimeout(async() => {
+  //     let userToken;
+  //     userToken = null;
+  //     try {
+  //       await AsyncStorage.getItem('userToken')
+  //     } catch(err) {
+  //       console.log(err)
+  //     }
+  //     //console.log(' user token: ', userToken);
+  //     dispatch({type: 'REGISTER', token: userToken})
+  //   }, 1000);
+  // }, []);
   const authContext = useMemo(() => ({
     signIn: async(foundUser) => {
       const userToken = String(foundUser[0].userToken);

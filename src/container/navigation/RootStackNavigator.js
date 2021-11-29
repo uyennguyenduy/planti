@@ -14,13 +14,13 @@ const Stack = createNativeStackNavigator();
 
 export const RootStackNavigator = () => {
   const { state } = useContext(AuthContext);
-  if ( state.isLoading ) {
-    return (
-      <View>
-        <ActivityIndicator size="large"/>
-      </View>
-    )
-  }
+  // if ( state.isLoading ) {
+  //   return (
+  //     <View>
+  //       <ActivityIndicator size="large"/>
+  //     </View>
+  //   )
+  // }
   return (
     <Stack.Navigator 
       initialRouteName="Welcome"
@@ -33,8 +33,7 @@ export const RootStackNavigator = () => {
         headerTintColor: 'white',
       }}
     >
-      { state.userToken == null ? (
-        <>
+    
           <Stack.Screen name="Welcome" component={WelcomeScreen}
             options={{
               headerShown: false,
@@ -43,17 +42,15 @@ export const RootStackNavigator = () => {
           <Stack.Screen name="Login" component={LoginScreen}/>
           <Stack.Screen name="Signup" component={SignupScreen}/>
           <Stack.Screen name="Recovery" component={RecoveryScreen}/>
-        </>
-      ) : (
-        <>
+  
           <Stack.Screen 
             name="Home" 
             component={HomeTabNavigator}
           />
-        </>
-      )
+        
+      
 
-      }
+      
     </Stack.Navigator>
   )
 }

@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { ImageBackground, Text, TouchableOpacity, View, StyleSheet } from 'react-native';
 import { Colors } from '../../theme/colorsTheme';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export function WelcomeScreen() {
   const nav = useNavigation();
+  useEffect(() => {
+    return async() => {
+    let user = AsyncStorage.getItem('user');
+    if (user) {
+      nav.navigate("Home")
+    }
+  }}, [])
   return(
     <View style={styles.container}>
       <ImageBackground
