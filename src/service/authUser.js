@@ -19,21 +19,19 @@ export const signupUser = (email, password, callback) => {
   })
 }
 
-export const signinUser = (email, password, callback) => {
-  firebase.auth().signInWithEmailAndPassword(email, password)
-  .then(user => {
-    console.log('user: ', user)
-    callback({result: "success", user})
-  })
-  .catch(err => {
-    callback({result: "fail", error: err})
-    console.log(err)
-  })
+export const signinUser = (email, password) => {
+  return firebase.auth().signInWithEmailAndPassword(email, password)
+  // .then(user => {
+  //   console.log('user: ', user)
+  //   callback({result: "success", user})
+  // })
+  // .catch(err => {
+  //   callback({result: "fail", error: err})
+  //   console.log(err)
+  // })
 }
 
 export const signoutUser = () => {
-  firebase.auth().signOut()
-  .then(user => {
-    console.log("sign out successfully")
-  })
+  return firebase.auth().signOut()
+ 
 }
