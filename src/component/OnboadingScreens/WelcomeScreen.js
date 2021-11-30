@@ -2,17 +2,24 @@ import React, { useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { ImageBackground, Text, TouchableOpacity, View, StyleSheet } from 'react-native';
 import { Colors } from '../../theme/colorsTheme';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectAuthUser } from '../../redux/reducers/authSlice';
+import { LoadingScreen } from '../LoadingScreen';
+import { syncUserRequest } from '../../redux/actions/authActions';
+
 
 export function WelcomeScreen() {
   const nav = useNavigation();
+  const { isLoading } = useSelector(selectAuthUser);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    return async() => {
-    let user = AsyncStorage.getItem('user');
-    if (user) {
-      nav.navigate("Home")
-    }
-  }}, [])
+    dispatch(syncUserRequest())
+  }, [])
+
+  if (isLoading) {
+    return <LoadingScreen/>
+  }
   return(
     <View style={styles.container}>
       <ImageBackground

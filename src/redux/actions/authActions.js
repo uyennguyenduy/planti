@@ -1,6 +1,10 @@
 import { createAction } from "@reduxjs/toolkit";
 import { getLastUpdateTimeSync } from "react-native-device-info";
 
+export const syncUserRequest =  createAction('auth/syncUserRequest');
+export const syncUserSuccess = createAction('auth/syncUserSuccess');
+export const syncUserFailed = createAction('auth/syncUserFailed');
+//signup
 export const signupRequest = createAction('auth/signupRequest');
 export const signupSuccess = createAction('auth/signupSuccess', function prepare(response) {
   return {
@@ -35,6 +39,7 @@ export const loginSuccess = createAction('auth/loginSuccess', function prepare(r
   return {
     payload: {
       userId: response.user.uid,
+      email: response.user.email,
       authResult: 'success'
     }
   }

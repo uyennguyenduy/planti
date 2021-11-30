@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { firebase } from '@react-native-firebase/auth';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { passwordForgetUSer, signinUser, signoutUser, signupUser } from '../../service/authUser';
-import { loginFailed, loginRequest, loginSuccess, logoutFailed, logoutRequest, logoutSuccess, passwordForgetFailed, passwordForgetRequest, passwordForgetSuccess, signFailed, signupFailed, signupRequest, signupSuccess } from '../actions/authActions';
+import { loginFailed, loginRequest, loginSuccess, logoutFailed, logoutRequest, logoutSuccess, passwordForgetFailed, passwordForgetRequest, passwordForgetSuccess, signFailed, signupFailed, signupRequest, signupSuccess, syncUserFailed, syncUserRequest, syncUserSuccess } from '../actions/authActions';
 import * as RootNavigation from '../../container/navigation/RootStackNavigator';
 
 async function SavetoAsyncStorage(userToken) {
@@ -15,7 +15,19 @@ async function SavetoAsyncStorage(userToken) {
 
 async function RemovetoAsyncStorage() {
   try {
-    await AsyncStorage.removeItem('userToken');
+    const response = await AsyncStorage.removeItem('userToken');
+    if(response !== null) {
+      RootNavigation.navigate("Home")
+      console.log(response);
+    }
+  } catch(err) {
+    console.log(err)
+  }
+}
+
+async function GetAsyncStorage() {
+  try {
+    await AsyncStorage.getItem('userToken');
   } catch(err) {
     console.log(err)
   }
@@ -28,8 +40,8 @@ function* loginSaga(action) {
     const userToken = response.user.getIdToken();
     
     console.log(response);
-
-    SavetoAsyncStorage(userToken);
+    
+    yield call(SavetoAsyncStorage, userToken);
     yield RootNavigation.navigate("Home");
     yield put(loginSuccess(response));
     
@@ -44,7 +56,7 @@ function* logoutSaga() {
     const response = yield call(signoutUser);
     console.log(response);
 
-    RemovetoAsyncStorage()
+    yield call(RemovetoAsyncStorage);
     yield RootNavigation.navigate("Welcome");
     yield put(logoutSuccess());
 
@@ -80,9 +92,21 @@ function* passwordForgetSaga(action) {
     yield put(passwordForgetFailed(error));
   }
 }
+
+function* syncUserSaga() {
+  try {
+    yield call(GetAsyncStorage);
+    yield put(syncUserSuccess())
+  } catch(err) {
+    console.log(error)
+    yield put(syncUserFailed(error))
+  }
+}
+
 export function* watchAuth() {
   yield takeLatest(loginRequest().type, loginSaga)
   yield takeLatest(logoutRequest().type, logoutSaga)
   yield takeLatest(signupRequest().type, signupSaga)
   yield takeLatest(passwordForgetRequest().type, passwordForgetSaga)
+  yield takeLatest(syncUserRequest().type, syncUserSaga)
 }

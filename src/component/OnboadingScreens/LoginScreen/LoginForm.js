@@ -1,11 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import {  View, Alert, TextInput, Text, TouchableOpacity, ImageBackground, ActivityIndicator} from 'react-native';
-import { AuthContext } from '../../../../App';
 import { styles } from '../../../theme/loginStyles';
-import { USERS } from '../../../assets/data/USERS'
-import { LoadingScreen } from '../../LoadingScreen';
-import { signinUser } from '../../../service/authUser';
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useDispatch, useSelector } from 'react-redux';
 import { loginRequest } from '../../../redux/actions/authActions';
 import { selectAuthUser } from '../../../redux/reducers/authSlice';
@@ -16,7 +11,7 @@ export function LoginForm({nav}) {
   const { isLoading, authResult, error } = useSelector(selectAuthUser);
 
   const dispatch = useDispatch();
-  const { signIn } = useContext(AuthContext).authContext;
+
   const [ data, setData ] = useState({
     email: '',
     password: '',

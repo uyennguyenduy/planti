@@ -1,6 +1,6 @@
 import React from "react";
 import { createAction, createSlice, isAnyOf} from "@reduxjs/toolkit";
-import { loginFailed, loginRequest, loginSuccess, logoutFailed, logoutRequest, logoutSuccess, passwordForgetFailed, passwordForgetRequest, passwordForgetSuccess, signupFailed, signupRequest, signupSuccess } from "../actions/authActions";
+import { loginFailed, loginRequest, loginSuccess, logoutFailed, logoutRequest, logoutSuccess, passwordForgetFailed, passwordForgetRequest, passwordForgetSuccess, signupFailed, signupRequest, signupSuccess, syncUserFailed, syncUserRequest, syncUserSuccess } from "../actions/authActions";
 
 
 const initialLogin = {
@@ -9,10 +9,9 @@ const initialLogin = {
     userName: null,
     isSignedIn: false,
     userToken: null,
-    password: null,
+    email: null,
     avatar: null,
-    url: null,
-    
+    url: null,  
   },
   isLoading: false,
   authResult: null,
@@ -27,6 +26,10 @@ export const authSlice = createSlice({
     .addCase(loginSuccess, (state, action) => {
       console.log(action.payload);
       return {
+        user: {
+          userId: action.payload.userId,
+          email: action.payload.email
+        },
         isLoading: false,
         authResult: action.payload.authResult,
       }
@@ -67,14 +70,14 @@ export const authSlice = createSlice({
       }
     })
     .addMatcher(
-      isAnyOf(loginRequest, logoutRequest, signupRequest, passwordForgetRequest), 
+      isAnyOf(loginRequest, logoutRequest, signupRequest, passwordForgetRequest, syncUserRequest), 
       (state, action) => {
         return {
           isLoading: true,
         }
       })
     .addMatcher(
-      isAnyOf(logoutSuccess, logoutFailed), 
+      isAnyOf(logoutSuccess, logoutFailed, syncUserFailed, syncUserSuccess), 
       (state, action) => {
         return {
           isLoading: false
@@ -83,5 +86,6 @@ export const authSlice = createSlice({
   }
 })
 export const selectAuthUser = state => state.authUser;
+export const selectUserInfo = state => state.authUser.user;
 
 export default authSlice.reducer;

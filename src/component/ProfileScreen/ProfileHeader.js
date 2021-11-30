@@ -1,19 +1,19 @@
 
 import React, { useContext, useState} from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, ImageBackground, TouchableWithoutFeedback} from 'react-native';
-import { AuthContext } from '../../../App';
 import { Colors } from '../../theme/colorsTheme';
 import { FontTheme } from '../../theme/fontTheme';
 import { Spaces } from '../../theme/spacing';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { SettingModal } from './SettingModal';
+import { useSelector } from 'react-redux';
+import { selectAuthUser, selectUserInfo } from '../../redux/reducers/authSlice';
 
 export function ProfileHeader() {
   const [ modalVisible, setModalVisible ] = useState(false);
 
-  const { state } = useContext(AuthContext);
- 
- 
+  const userInfo = useSelector(selectUserInfo);
+
   return ( 
     <View style={styles.headerView}>
       <Image 
@@ -21,7 +21,7 @@ export function ProfileHeader() {
         source={require('../../assets/Images/user.png')}
         resizeMode="cover"
       />
-      <Text style={styles.heading2}>{state.userName}</Text>
+      <Text style={styles.heading2}>{userInfo.email}</Text>
       <Text style={styles.status}>After rainny days, it will be shine</Text>
       <View style={styles.settingView}>
         <TouchableOpacity 
