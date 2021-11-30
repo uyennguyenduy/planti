@@ -1,14 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { View, Modal, Text, Pressable, TouchableHighlight, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { Colors } from '../../theme/colorsTheme';
 import { Spaces } from '../../theme/spacing';
-import { AuthContext } from '../../../App';
 import { FontTheme } from '../../theme/fontTheme';
+import { useDispatch } from 'react-redux';
+import { logoutRequest } from '../../redux/actions/authActions';
 
 
 export function SettingModal({modalVisible, onClosePress}) {
-
-  const { signOut } = useContext(AuthContext).authContext;
+  const dispatch = useDispatch();
   return (
     
       <Modal
@@ -24,7 +24,7 @@ export function SettingModal({modalVisible, onClosePress}) {
           <View style={styles.modalView}>
             <View style={styles.modalLayout}>
               <TouchableHighlight
-                onPress={() => signOut()}
+                onPress={() => dispatch(logoutRequest())}
               >
                 <Text style={styles.modalBtn}>Log out</Text>
               </TouchableHighlight>

@@ -4,7 +4,7 @@ import {  View, TextInput, Text, TouchableOpacity, ImageBackground } from 'react
 import { styles } from '../../../theme/loginStyles';
 import { RecoveryForm } from './RecoveryForm';
 
-export function RecoveryScreen() {
+export function RecoveryScreen({navigation}) {
   
 
   return(
@@ -18,7 +18,7 @@ export function RecoveryScreen() {
           <Text style={styles.heading}>Password Recovery</Text>
         </View>
         
-        <RecoveryForm/>
+        <RecoveryForm nav={navigation}/>
 
         <View style={styles.footer}>
           <Text style={styles.textBody}>

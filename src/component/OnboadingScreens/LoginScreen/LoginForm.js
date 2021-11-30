@@ -1,15 +1,21 @@
-import React, { useContext, useState } from 'react';
-import {  View, Alert, TextInput, Text, TouchableOpacity, ImageBackground} from 'react-native';
+import React, { useContext, useEffect, useState } from 'react';
+import {  View, Alert, TextInput, Text, TouchableOpacity, ImageBackground, ActivityIndicator} from 'react-native';
 import { AuthContext } from '../../../../App';
 import { styles } from '../../../theme/loginStyles';
 import { USERS } from '../../../assets/data/USERS'
 import { LoadingScreen } from '../../LoadingScreen';
 import { signinUser } from '../../../service/authUser';
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useDispatch, useSelector } from 'react-redux';
+import { loginRequest } from '../../../redux/actions/authActions';
+import { selectAuthUser } from '../../../redux/reducers/authSlice';
+
 
 export function LoginForm({nav}) {
 
+  const { isLoading, authResult, error } = useSelector(selectAuthUser);
 
+  const dispatch = useDispatch();
   const { signIn } = useContext(AuthContext).authContext;
   const [ data, setData ] = useState({
     email: '',
@@ -17,7 +23,6 @@ export function LoginForm({nav}) {
     check_textInputChange: false,
     emailError: '',
     passwordError: '',
-    isLoading: false
   });
   
   const onEmailChange = (email) => {
@@ -58,36 +63,12 @@ export function LoginForm({nav}) {
     }
   }
   
-
-  const signInCallback = async (response) => {
-    setData({
-      ...data,
-      isLoading: false
-    })
-    console.log('response: ', response)
-    if (response.result === 'success') {
-      await AsyncStorage.setItem('user', JSON.stringify(response.user))
-      nav.navigate("Home")
-    } else {
-      Alert.alert("Error Signing in", response.error, [
-        {text: "OK"}
-      ])
-    }
+  const login = (email, password) => {
+    dispatch(loginRequest({email, password}));
+    console.log(dispatch(loginRequest({email, password})))
   }
 
-  const login = () => {
-    setData({
-      ...data,
-      isLoading: true
-    });
-    signinUser(data.email, data.password, signInCallback)
-  }
-
-  if (data.isLoading) {
-    return (
-      <LoadingScreen />
-    )
-  }
+  
 
   return(
    
@@ -113,21 +94,24 @@ export function LoginForm({nav}) {
           />
           <Text style={styles.textWarning}>{data.passwordError && data.password12345Error}</Text>
         </View>
-            
+          
         <TouchableOpacity 
           disabled={data.email.length === 0 || data.password.length === 0 || 
             data.emailError || data.passwordError
           }
           style={styles.loginBtn}
-          onPress={login}
+          onPress={() => login(data.email, data.password)}
         >
-          <Text style={styles.login}>LOGIN</Text>
+          <Text style={styles.login}>{isLoading ? <ActivityIndicator/> : "LOGIN" }</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => nav.navigate("Recovery")}
         >
           <Text style={styles.textBody}>Forgot password?</Text>
         </TouchableOpacity>
+        {(isLoading === false && authResult === 'failed') ? Alert.alert("Error Login", error, [
+         {text: "OK"}]) : null
+        }
     </View>
 
        

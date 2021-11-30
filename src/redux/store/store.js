@@ -12,7 +12,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
   reducer: {
-    auth: authReducer,
+    authUser: authReducer,
     posts: postsReducer,
     comments: commentsReducer,
     plants: plantsReducer,
@@ -20,9 +20,7 @@ export const store = configureStore({
     sortTerms: sortsReducer
   },
   middleware: getDefaultMiddleware =>
-    getDefaultMiddleware({
-      serializableCheck: false
-    }).concat(sagaMiddleware)
+    getDefaultMiddleware({serializableCheck: false}).concat(sagaMiddleware)
 })
 
 sagaMiddleware.run(rootSaga)

@@ -7,10 +7,19 @@ import { WelcomeScreen } from '../../component/OnboadingScreens/WelcomeScreen.js
 import { LoginScreen } from '../../component/OnboadingScreens/LoginScreen/index';
 import { SignupScreen } from '../../component/OnboadingScreens/SignupScreen/index.js';
 import { RecoveryScreen } from '../../component/OnboadingScreens/RecoveryScreen/index.js';
+import { createNavigationContainerRef } from '@react-navigation/core';
 
 
 
 const Stack = createNativeStackNavigator();
+
+export const navigationRef = createNavigationContainerRef();
+
+export function navigate(name, params) {
+  if (navigationRef.isReady()) {
+    navigationRef.navigate(name, params)
+  }
+}
 
 export const RootStackNavigator = () => {
   const { state } = useContext(AuthContext);

@@ -1,12 +1,20 @@
 
 import React, { useState } from 'react';
-import {  View, TextInput, Text, TouchableOpacity, ImageBackground, Alert} from 'react-native';
+import { useCallback } from 'react';
+import { memo } from 'react';
+import { useMemo } from 'react';
+import { useEffect } from 'react';
+import {  View, TextInput, Text, TouchableOpacity, ImageBackground, Alert, ActivityIndicator} from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { signupRequest } from '../../../redux/actions/authActions';
+import { selectAuthUser } from '../../../redux/reducers/authSlice';
 import { signupUser } from '../../../service/authUser';
 import { styles } from '../../../theme/loginStyles';
 import { LoadingScreen } from '../../LoadingScreen';
 
 export function SignupForm({nav}) {
-
+  const dispatch = useDispatch();
+  const { isLoading, authResult, error } = useSelector(selectAuthUser);
   const [ data, setData ] = useState({
     email: '',
     password: '',
@@ -14,8 +22,8 @@ export function SignupForm({nav}) {
     passwordConfirmError: '',
     emailError: '',
     passwordError: '',
-    isLoading: false
   })
+
   const onEmailChange = (email) => {
     let regex = '';
     if (email.length === 0) {
@@ -74,33 +82,22 @@ export function SignupForm({nav}) {
       })
     }
   }
-  const signupCallback = (response) => {
-    console.log(response.result)
-    if (response.result === "success") {
-      nav.navigate("Home")
-    } else {
-      Alert.alert("Error creating account", response.error, [
-        {text: "OK"}
-      ])
-    }
-    setData({
-      ...data,
-      loading: false
-    })
-  }
-  const signUp = () => {
-    setData({
-      ...data,
-      loading: true
-    });
-    signupUser(data.email, data.password, signupCallback)
-  }
 
-  if (data.isLoading) {
-    return (
-      <LoadingScreen />
-    )
+  const signUp = (email, password) => {
+    console.log(dispatch(signupRequest({email, password})))
+    return dispatch(signupRequest({email, password}))
   }
+ 
+    const alert = (isLoading === false && authResult === 'failed') ? 
+      Alert.alert("Error creating account", error, [
+        {text: "OK"}
+      ]) : 
+      (isLoading === false && authResult === 'success') ?
+      Alert.alert("Signup", "Created successfully", [
+        {text: "OK", onPress: () => nav.navigate("Login")}
+      ]) : null
+
+
   return(
     
     <View style={[styles.loginForm, {borderWidth: 0}]}>
@@ -140,10 +137,13 @@ export function SignupForm({nav}) {
           data.emailError || data.passwordError
         }
         style={styles.loginBtn}
-        onPress={signUp}
+        onPress={() => signUp(data.email, data.password)}
       >
-        <Text style={styles.login}>JOIN WITH US!</Text>
+        <Text style={styles.login}>
+          { isLoading? <ActivityIndicator color="white"/> :"JOIN WITH US!"}
+        </Text>
       </TouchableOpacity>   
+      { alert }
     </View>
         
   )

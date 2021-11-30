@@ -1,11 +1,25 @@
 
 import React, { useState } from 'react';
-import {  View, TextInput, Text, TouchableOpacity, ImageBackground } from 'react-native';
+import {  View, TextInput, Text, TouchableOpacity, Alert, ActivityIndicator } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { passwordForgetRequest } from '../../../redux/actions/authActions';
+import { selectAuthUser } from '../../../redux/reducers/authSlice';
 import { styles } from '../../../theme/loginStyles';
 
-export function RecoveryForm() {
-  
+export function RecoveryForm({nav}) {
+  const dispatch = useDispatch();
+  const { isLoading, authResult, error } = useSelector(selectAuthUser);
+
   const [ email, setEmail ] = useState('');
+
+  const alert = (isLoading === false && authResult === 'failed') ? 
+    Alert.alert("Error", error, [
+      {text: "OK"}
+    ]) : 
+    (isLoading === false && authResult === 'success') ?
+    Alert.alert("Recovery", "New password is sent to your email", [
+      {text: "OK", onPress: () => nav.navigate("Login")}
+    ]) : null;
 
   return(
    
@@ -26,10 +40,13 @@ export function RecoveryForm() {
       </View>
       <TouchableOpacity 
         style={styles.loginBtn}
-        onPress={() => alert("Login succesfully")}
+        onPress={() => dispatch(passwordForgetRequest(email))}
       >
-        <Text style={styles.login}>RESET PASSWORD</Text>
+        <Text style={styles.login}>
+          { isLoading? <ActivityIndicator color="white"/> :"RESET PASSWORD"}
+        </Text>
       </TouchableOpacity>
+      {alert}
     </View>
         
   )

@@ -1,20 +1,18 @@
 import React from "react";
-import { createAction, createSlice } from "@reduxjs/toolkit";
+import { createAction, createSlice, isAnyOf} from "@reduxjs/toolkit";
+import { loginFailed, loginRequest, loginSuccess, logoutFailed, logoutRequest, logoutSuccess, passwordForgetFailed, passwordForgetRequest, passwordForgetSuccess, signupFailed, signupRequest, signupSuccess } from "../actions/authActions";
 
-
-const loginRequest = createAction('auth/loginRequest');
-const loginSuccess = createAction('auth/loginSuccess');
-const loginFailed = createAction('auth/loginFailed');
 
 const initialLogin = {
   user: {
+    userId: null,
+    userName: null,
     isSignedIn: false,
     userToken: null,
     password: null,
     avatar: null,
-    userId: null,
     url: null,
-    userName: null
+    
   },
   isLoading: false,
   authResult: null,
@@ -26,8 +24,64 @@ export const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-    .addCase()
+    .addCase(loginSuccess, (state, action) => {
+      console.log(action.payload);
+      return {
+        isLoading: false,
+        authResult: action.payload.authResult,
+      }
+    })
+    .addCase(loginFailed, (state, action) => {
+      console.log(action.payload)
+      return {
+        isLoading: false,
+        authResult: action.payload.authResult,
+        error: action.payload.error
+      }
+    })
+    .addCase(signupSuccess, (state, action) => {
+      return {
+        isLoading: false,
+        authResult: action.payload.authResult
+      }
+    })
+    .addCase(signupFailed, (state, action) => {
+      console.log(action.payload)
+      return {
+        isLoading: false,
+        authResult: action.payload.authResult,
+        error: action.payload.error
+      }
+    })
+    .addCase(passwordForgetSuccess, (state, action) => {
+      return {
+        isLoading: false,
+        authResult: 'success'
+      }
+    })
+    .addCase(passwordForgetFailed, (state, action) => {
+      return {
+        isLoading: false,
+        authResult: action.payload.authResult,
+        error: action.payload.error
+      }
+    })
+    .addMatcher(
+      isAnyOf(loginRequest, logoutRequest, signupRequest, passwordForgetRequest), 
+      (state, action) => {
+        return {
+          isLoading: true,
+        }
+      })
+    .addMatcher(
+      isAnyOf(logoutSuccess, logoutFailed), 
+      (state, action) => {
+        return {
+          isLoading: false
+        }
+      })
   }
 })
+export const selectAuthUser = state => state.authUser;
 
 export default authSlice.reducer;

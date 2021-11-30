@@ -4,9 +4,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { RootStackNavigator } from './src/container/navigation/RootStackNavigator';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Provider } from "react-redux";
-import { store } from './src/redux/store/store';
+import { store } from "./src/redux/store/store";
 import { initialUsersState, usersReducer } from "./src/redux/reducers/loginReducer";
-import { Text, View } from "react-native";
+import { navigationRef } from "./src/container/navigation/RootStackNavigator";
 
 export const AuthContext = createContext();
 
@@ -52,7 +52,7 @@ function App({navigation}) {
   return (
     <Provider store={store}>
       <AuthContext.Provider value={{state, authContext}}>
-        <NavigationContainer>
+        <NavigationContainer ref={navigationRef}>
           <RootStackNavigator />
         </NavigationContainer>
     </AuthContext.Provider>
