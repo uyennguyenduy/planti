@@ -5,7 +5,7 @@ import { selectSearchTerm } from './searchTermSlice';
 import { selectSortTerms } from './sortsSlice';
 
 const initialState = {
-  allPlants = [],
+  allPlants: [],
   isLoading: true,
   hasError: false
 }

@@ -7,9 +7,7 @@ import { LoginScreen } from '../../component/OnboadingScreens/LoginScreen/index'
 import { SignupScreen } from '../../component/OnboadingScreens/SignupScreen/index.js';
 import { RecoveryScreen } from '../../component/OnboadingScreens/RecoveryScreen/index.js';
 import { createNavigationContainerRef } from '@react-navigation/core';
-import { useSelector } from 'react-redux';
-import { selectAuthUser } from '../../redux/reducers/authSlice.js';
-import { LoadingScreen } from '../../component/LoadingScreen.js';
+
 
 
 

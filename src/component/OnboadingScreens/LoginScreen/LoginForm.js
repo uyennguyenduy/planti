@@ -97,7 +97,7 @@ export function LoginForm({nav}) {
           style={styles.loginBtn}
           onPress={() => login(data.email, data.password)}
         >
-          <Text style={styles.login}>{isLoading ? <ActivityIndicator/> : "LOGIN" }</Text>
+          <Text style={styles.login}>{isLoading ? <ActivityIndicator color="white"/> : "LOGIN" }</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => nav.navigate("Recovery")}

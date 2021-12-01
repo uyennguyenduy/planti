@@ -1,10 +1,13 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { useSelector } from 'react-redux';
 import { Colors } from '../../../theme/colorsTheme';
 import { FontTheme } from '../../../theme/fontTheme';
 import { Spaces } from '../../../theme/spacing';
 
 export function PostCard({post, onPress}) {
+
+  
   return (
     <TouchableOpacity
       onPress={onPress}

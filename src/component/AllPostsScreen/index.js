@@ -3,7 +3,7 @@ import { View, Text, FlatList, StyleSheet, ImageBackground } from 'react-native'
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AllPosts } from "../../container/AllPostsContainer/AllPosts";
 
-export function AllPostsScreen({route, navigation}) {
+export function AllPostsScreen({route}) {
   return (
     <ImageBackground
       source={require('../../assets/Images/bg-plant6.jpg')}

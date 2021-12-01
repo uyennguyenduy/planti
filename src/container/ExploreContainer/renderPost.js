@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigation } from '@react-navigation/core';
 import { selectLivingWithPlantsPosts, selectPlantCarePosts } from '../../redux/reducers/postsSlice';
 import { PostsListFooter } from '../../component/AllPostsScreen/PostsListFooter';
-import { StyleSheet, View, Text, TouchableOpacity, FlatList } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
 import { Spaces } from '../../theme/spacing';
 import { FontTheme } from '../../theme/fontTheme';
 import { Colors } from '../../theme/colorsTheme';
@@ -12,6 +12,7 @@ import { PostCard } from '../../component/common/Card/PostCard';
 export function RenderPost({label}) {
   const nav = useNavigation();
 
+  const { isLoading } = useSelector(state => state.posts);
   const plantCarePosts = useSelector(selectPlantCarePosts);
   const livingWithPlantsPosts = useSelector(selectLivingWithPlantsPosts);
 
@@ -37,7 +38,7 @@ export function RenderPost({label}) {
           <Text style={styles.seeAllBtn}>See all</Text>
         </TouchableOpacity>
       </View>
-      
+      { isLoading ? <ActivityIndicator size="large" color="white"/> : 
       <FlatList 
         data={targetedData}
         renderItem={renderItem}
@@ -46,6 +47,7 @@ export function RenderPost({label}) {
         showsHorizontalScrollIndicator={false}
         ListFooterComponent={PostsListFooter}
       />
+      }
     </View>
   )
 }

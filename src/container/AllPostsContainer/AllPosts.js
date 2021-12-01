@@ -1,10 +1,11 @@
 import React from "react";
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { View, Text, FlatList, StyleSheet, ActivityIndicator } from 'react-native';
 import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/core";
-import { selectAllPosts } from "../../redux/reducers/postsSlice";
+import { selectAllPosts, selectPostsState } from "../../redux/reducers/postsSlice";
 import { PostCard } from "../../component/common/Card/PostCard";
 import { Colors } from "../../theme/colorsTheme";
+import { isLandscape } from "react-native-device-info";
 
 export function AllPosts({route}) {
 
@@ -22,7 +23,7 @@ export function AllPosts({route}) {
       title: item.title
     })}
     />)
-
+ 
   return (
     <FlatList 
       style={styles.container}

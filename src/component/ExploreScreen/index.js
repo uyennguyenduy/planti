@@ -1,20 +1,26 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { ScrollView, ImageBackground, StyleSheet, View, Text} from 'react-native';
 import { useScrollToTop } from '@react-navigation/native';
 import { Colors } from '../../theme/colorsTheme';
 import { FontTheme } from '../../theme/fontTheme';
 import { Spaces } from '../../theme/spacing';
 import { ExploreHeader } from './ExploreHeader';
-import { ExploreFooter } from './ExploreFooter';
-import { RenderPostList } from '../../container/PostsContainer/renderPostList';
 import { LinearBackground } from '../common/Background/LinearBackground';
 import { ExploreBody } from './ExploreBody';
+import { useDispatch } from 'react-redux';
+import { getPostsRequest } from '../../redux/actions/postsActions';
 
 export function ExploreScreen({navigation}) {
+
+  const dispatch = useDispatch();
 
   const ref = useRef();
   useScrollToTop(ref);
   
+  useEffect(() => {
+    dispatch(getPostsRequest())
+  }, []);
+
   return (
     <ScrollView style={styles.container} ref={ref}>
       <LinearBackground 

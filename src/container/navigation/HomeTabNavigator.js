@@ -38,8 +38,8 @@ export function HomeTabNavigator() {
       }
     >
         <Tab.Screen 
-        name="Firebase" 
-        component={FirebaseScreen}
+        name="Feed" 
+        component={FeedStackNavigator}
         options={{
           title: "Explore"
         }}
