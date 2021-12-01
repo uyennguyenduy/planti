@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { PLANTS } from '../../assets/data/PLANTS';
+import { getRandomplant } from '../../utils/randomPlant';
 import { getPlantsFailed, getPlantsRequest, getPlantsSuccess } from '../actions/plantsActions';
 import { selectSearchTerm } from './searchTermSlice';
 import { selectSortTerms } from './sortsSlice';
@@ -57,9 +58,13 @@ export const selectAllPlants = state => {
   if (!isLoading) {
     return state.plants.allPlants;
   }
-  return null
 };
-
+export const selectRandomPlant = state => {
+  const allPlants = selectAllPlants(state);
+  if (allPlants) {
+    return allPlants[getRandomplant(0, allPlants.length - 1)]
+  }
+}
 export const selectFilteredPlant = state => {
   
   const allPlants = selectAllPlants(state);

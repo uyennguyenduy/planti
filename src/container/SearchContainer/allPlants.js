@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native';
 import { useSelector } from "react-redux";
 import { PlantCard } from "../../component/common/Card/PlantCard";
 import { selectAllPlants, selectFilteredPlant } from "../../redux/reducers/plantsSlice";
@@ -9,15 +9,18 @@ import { FontTheme } from "../../theme/fontTheme";
 
 export function AllPlants({nav}) {
 
-
+  const { isLoading } = useSelector(state => state.plants);
   const plants = useSelector(selectFilteredPlant);
 
   if (!plants) {
     return (
       <View>
-        <Text>No found</Text>
+        <Text>Not found</Text>
       </View>
     )
+  }
+  if (isLoading) {
+    return <ActivityIndicator size="large" />
   }
   return (
     <View>

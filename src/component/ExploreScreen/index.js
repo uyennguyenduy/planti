@@ -9,6 +9,7 @@ import { LinearBackground } from '../common/Background/LinearBackground';
 import { ExploreBody } from './ExploreBody';
 import { useDispatch } from 'react-redux';
 import { getPostsRequest } from '../../redux/actions/postsActions';
+import { getPlantsRequest } from '../../redux/actions/plantsActions';
 
 export function ExploreScreen({navigation}) {
 
@@ -19,6 +20,7 @@ export function ExploreScreen({navigation}) {
   
   useEffect(() => {
     dispatch(getPostsRequest())
+    dispatch(getPlantsRequest())
   }, []);
 
   return (

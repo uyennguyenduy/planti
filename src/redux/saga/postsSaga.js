@@ -6,7 +6,6 @@ import { getPostsFailed, getPostsRequest, getPostsSuccess } from '../actions/pos
 function* getPostsSaga() {
   try {
     const querySnapshot = yield call(getCollection, "Posts");
-    console.log(querySnapshot.size);
     let posts = [];
     querySnapshot.forEach(doc => {
       posts.push({
