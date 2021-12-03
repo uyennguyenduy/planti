@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useState } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, FlatList, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, FlatList, ScrollView, ActivityIndicator } from 'react-native';
 import { useSelector } from 'react-redux';
 import { selectAllPosts } from '../../redux/reducers/postsSlice';
 import { selectAllComments } from '../../redux/reducers/commentsSlice';
@@ -15,17 +15,18 @@ export function SinglePostBody ({route}) {
 
   const { postId } = route.params;
 
+  const { isLoading } = useSelector(state => state.comments)
   const allComments = useSelector(selectAllComments);
   const allPosts = useSelector(selectAllPosts);
 
-  const singlePost = allPosts.filter(item => item.id === postId)[0];
-  const singlePostComments = allComments.filter(item => item.postId === postId);
+  const singlePost = allPosts.filter(post => post.id === postId)[0];
+  const singlePostComments = allComments?.filter(item => item.postId === "FJOelorivL0iDbXpJSkS");
   
   return (
     <>
       <View>
         <Text style={styles.heading1}>{singlePost.title}</Text>
-        <Text style={styles.subtitle}>By Author</Text>
+        <Text style={styles.subtitle}>{singlePost.author}</Text>
         <Text style={styles.body}>{singlePost.content}</Text>
       </View>
       <View style={styles.reactionView}>
@@ -35,10 +36,12 @@ export function SinglePostBody ({route}) {
           color={(singlePost.reaction <= 0) ? "gray" : Colors.warning}
         />
         <Text style={[styles.reaction, {marginLeft: 180}]}>
-          {singlePostComments.length} comments
+          {singlePostComments?.length} comments
         </Text>
       </View>
-      <AllComments postId={postId}/>
+      { isLoading ? <ActivityIndicator size="large"/>
+        : <AllComments postId={postId}/>
+      }
       <AddCommentForm postId={postId} />
     </>
   )

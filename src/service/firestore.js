@@ -1,7 +1,23 @@
 import firestore from "@react-native-firebase/firestore"
 
+// export const getCollection = (pathorRef) => {
+  
+//     return firestore().collection(pathorRef).onSnapshot(querySnapShot => {
+//       let collection = [];
+//       querySnapShot.forEach(doc => {
+//         collection.push({
+//           id: doc.id,
+//           ...doc.data()
+//         });
+//       });
+//       console.log(collection.length)
+//       return collection;
+//     })
+  
+// }
+
 export const getCollection = (collection) => {
-  return firestore().collection(collection).get()
+  return firestore().collection(collection).get();
 }
 
 export const getDocument = (collection, doc) => {

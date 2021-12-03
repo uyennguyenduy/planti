@@ -1,6 +1,8 @@
 import { createAction } from "@reduxjs/toolkit";
 import { getLastUpdateTimeSync } from "react-native-device-info";
 
+export const resetAuthState = createAction('auth/resetAuthState');
+
 export const syncUserRequest =  createAction('auth/syncUserRequest');
 export const syncUserSuccess = createAction('auth/syncUserSuccess');
 export const syncUserFailed = createAction('auth/syncUserFailed');

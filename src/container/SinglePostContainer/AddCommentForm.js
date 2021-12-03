@@ -1,25 +1,29 @@
 import { nanoid } from "@reduxjs/toolkit";
 import React, { useContext, useState } from "react";
 import { TextInput, Text, View, Button, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { useDispatch } from "react-redux";
-import { commentAdded } from "../../redux/reducers/commentsSlice";
+import { useDispatch, useSelector } from "react-redux";
 import { Spaces } from "../../theme/spacing";
 import { Colors } from "../../theme/colorsTheme";
 import { FontTheme } from "../../theme/fontTheme";
+import { selectUserInfo } from "../../redux/reducers/authSlice";
+import { addComment } from "../../redux/actions/commentsAction";
 
 
 
 export const AddCommentForm = ({postId}) => {
+
   const [ comment, setComment ] = useState(' ');
 
   const dispatch = useDispatch();
 
+  const userInfo = useSelector(selectUserInfo);
+
   const onAddComment = () => {
     if (comment) {
-      dispatch(commentAdded({
-        id: nanoid(),
-        userId: 1,
-        postId: postId,
+      dispatch(addComment({
+        author: userInfo.email,
+        userId: userInfo.userId,
+        postId,
         content: comment
       }))
       setComment("");

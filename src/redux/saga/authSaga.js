@@ -39,9 +39,8 @@ function* loginSaga(action) {
     const response = yield call(signinUser, email, password)
     const userToken = response.user.getIdToken();
     
-    console.log(response);
-    
     yield call(SavetoAsyncStorage, userToken);
+    console.log( yield call(SavetoAsyncStorage, userToken))
     yield RootNavigation.navigate("Home");
     yield put(loginSuccess(response));
     
@@ -54,9 +53,9 @@ function* loginSaga(action) {
 function* logoutSaga() {
   try {
     const response = yield call(signoutUser);
-    console.log(response);
 
     yield call(RemovetoAsyncStorage);
+    console.log(RemovetoAsyncStorage())
     yield RootNavigation.navigate("Welcome");
     yield put(logoutSuccess());
 
@@ -71,7 +70,7 @@ function* signupSaga(action) {
     const { email, password } = action.payload;
     const response = yield call(signupUser, email, password);
     console.log(response);
-    // yield RootNavigation.navigate("Login");
+   
     yield put(signupSuccess(response));
 
   } catch(error) {
@@ -95,8 +94,15 @@ function* passwordForgetSaga(action) {
 
 function* syncUserSaga() {
   try {
-    yield call(GetAsyncStorage);
-    yield put(syncUserSuccess())
+    const userToken = yield call(GetAsyncStorage);
+    console.log(userToken);
+    if (userToken) {
+      yield RootNavigation.navigate("Home")
+      yield put(syncUserSuccess())
+    } else {
+      yield RootNavigation.navigate("Welcome")
+      yield put(syncUserFailed())
+    }
   } catch(err) {
     console.log(error)
     yield put(syncUserFailed(error))
@@ -104,6 +110,7 @@ function* syncUserSaga() {
 }
 
 export function* watchAuth() {
+
   yield takeLatest(loginRequest().type, loginSaga)
   yield takeLatest(logoutRequest().type, logoutSaga)
   yield takeLatest(signupRequest().type, signupSaga)

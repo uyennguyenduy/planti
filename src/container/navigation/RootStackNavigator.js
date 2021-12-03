@@ -27,11 +27,8 @@ export const RootStackNavigator = () => {
     <Stack.Navigator 
       initialRouteName="Welcome"
       screenOptions={{
-        headerTransparent: false,
-        headerShown:false,
-        headerStyle: {
-          borderBottomWidth: 0
-        },
+        headerTransparent: true,
+        title: "",
         headerTintColor: 'white',
       }}
     >

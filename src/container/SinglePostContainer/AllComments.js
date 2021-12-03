@@ -9,11 +9,12 @@ import { Spaces } from "../../theme/spacing";
 export function AllComments({postId}) {
 
   const allComments = useSelector(selectAllComments);
-  const targetedComments = allComments.filter(comment => comment.postId === postId);
+  const targetedComments = allComments?.filter(comment => comment.postId === postId);
 
   return (
     <View style={styles.commentView}>
-      {targetedComments.map(comment => (
+      {targetedComments?.map(comment => (
+        
         <CommentMedia comment={comment} key={comment.id}/>
       ))}
     </View>

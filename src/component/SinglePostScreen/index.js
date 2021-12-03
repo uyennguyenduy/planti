@@ -1,11 +1,15 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useEffect, useLayoutEffect } from 'react';
 import Iconicons from 'react-native-vector-icons/Ionicons';
 import { ScrollView, TouchableOpacity, StyleSheet, ImageBackground, View } from 'react-native';
 import { SinglePostBody } from './SinglePostBody';
 import { Colors } from '../../theme/colorsTheme';
 import { Spaces } from '../../theme/spacing';
+import { useDispatch } from 'react-redux';
+import { getCommentsRequest } from '../../redux/actions/commentsAction';
 
 export function SinglePost({route, navigation}) {
+
+  const dispatch = useDispatch();
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -16,6 +20,10 @@ export function SinglePost({route, navigation}) {
       )
     })
   })
+
+  useEffect(() => {
+    dispatch(getCommentsRequest())
+  }, [dispatch])
 
   return (
     <ScrollView style={styles.container}>

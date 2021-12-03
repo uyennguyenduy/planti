@@ -1,6 +1,6 @@
 import React from "react";
 import { createAction, createSlice, isAnyOf} from "@reduxjs/toolkit";
-import { loginFailed, loginRequest, loginSuccess, logoutFailed, logoutRequest, logoutSuccess, passwordForgetFailed, passwordForgetRequest, passwordForgetSuccess, signupFailed, signupRequest, signupSuccess, syncUserFailed, syncUserRequest, syncUserSuccess } from "../actions/authActions";
+import { loginFailed, loginRequest, loginSuccess, logoutFailed, logoutRequest, logoutSuccess, passwordForgetFailed, passwordForgetRequest, passwordForgetSuccess, resetAuthState, signupFailed, signupRequest, signupSuccess, syncUserFailed, syncUserRequest, syncUserSuccess } from "../actions/authActions";
 
 
 const initialLogin = {
@@ -23,6 +23,13 @@ export const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+    .addCase(resetAuthState, state => {
+      return {
+        isLoading: false,
+        authResult: null,
+        error: null
+      }
+    })
     .addCase(loginSuccess, (state, action) => {
       console.log(action.payload);
       return {
@@ -83,6 +90,7 @@ export const authSlice = createSlice({
           isLoading: false
         }
       })
+    
   }
 })
 export const selectAuthUser = state => state.authUser;

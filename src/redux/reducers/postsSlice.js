@@ -12,12 +12,12 @@ const postsSlice = createSlice({
   name:'posts',
   initialState: initialPosts,
   reducers: {
-    reactionAdded(state, action) {
-      const { postId } = action.payload;
-      const existingPost = state.allPosts.find(post => post.id === postId);
-      if (existingPost) {
-        existingPost.reaction++;
-      }
+    reactionAdded: (state, action) => {
+      // const { postId } = action.payload;
+      // const existingPost = state.allPosts.find(post => post.id === postId);
+      // if (existingPost) {
+      //   existingPost.reaction++;
+      // }
     }
   },
   extraReducers: (builder) => {
@@ -62,15 +62,15 @@ export const selectAllPosts = state => {
 }
 export const selectPlantCarePosts = state => {
   const allPosts = selectAllPosts(state);
-  if (allPosts)
-  return allPosts.filter((post) => post.label === 'Plant Care')
+ 
+  return allPosts?.filter((post) => post.label === 'Plant Care')
  
 }
 
 export const selectLivingWithPlantsPosts = state => {
   const allPosts = selectAllPosts(state);
-  if (allPosts)
-  return allPosts.filter((post) => post.label === 'Living With Plants')
+
+  return allPosts?.filter((post) => post.label === 'Living With Plants')
 }
 
 

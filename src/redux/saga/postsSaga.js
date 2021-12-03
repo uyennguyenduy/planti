@@ -7,14 +7,16 @@ import { reactionAdded } from '../reducers/postsSlice';
 function* getPostsSaga() {
   try {
     const querySnapshot = yield call(getCollection, "Posts");
+    // console.log(collection.length)
     let posts = [];
+    
     querySnapshot.forEach(doc => {
       posts.push({
         id: doc.id,
         ...doc.data()
       })
     })
-
+  
     yield put(getPostsSuccess(posts))
 
   } catch (error) {

@@ -21,7 +21,7 @@ export function ProfileHeader() {
         source={require('../../assets/Images/user.png')}
         resizeMode="cover"
       />
-      <Text style={styles.heading2}>{userInfo.email}</Text>
+      <Text style={styles.heading2}>{userInfo?.email}</Text>
       <Text style={styles.status}>After rainny days, it will be shine</Text>
       <View style={styles.settingView}>
         <TouchableOpacity 

@@ -5,7 +5,7 @@ import { getPlantsFailed, getPlantsRequest, getPlantsSuccess } from '../actions/
 function* getPlantsSaga() {
   try {
     const querySnapshot = yield call(getCollection, "Plants");
-    console.log(querySnapshot.size);
+
     let plants = [];
     querySnapshot.forEach(doc => {
       plants.push({

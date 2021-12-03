@@ -1,12 +1,14 @@
-import { all } from 'redux-saga/effects';
+import { all, fork } from 'redux-saga/effects';
 import { watchAuth } from './authSaga';
 import { watchPosts } from './postsSaga';
 import { watchPlants } from './plantsSaga';
+import { watchComments } from './commentsSaga';
 
 export default function* rootSaga() {
   yield all([
-    watchAuth(),
-    watchPosts(),
-    watchPlants()
+    fork(watchAuth),
+    fork(watchPosts),
+    fork(watchPlants),
+    fork(watchComments)
   ])
 }

@@ -2,11 +2,12 @@
 import React, { useState } from 'react';
 import {  View, TextInput, Text, TouchableOpacity, Alert, ActivityIndicator } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { passwordForgetRequest } from '../../../redux/actions/authActions';
+import { passwordForgetRequest, resetAuthState } from '../../../redux/actions/authActions';
 import { selectAuthUser } from '../../../redux/reducers/authSlice';
 import { styles } from '../../../theme/loginStyles';
 
 export function RecoveryForm({nav}) {
+
   const dispatch = useDispatch();
   const { isLoading, authResult, error } = useSelector(selectAuthUser);
 
@@ -14,11 +15,17 @@ export function RecoveryForm({nav}) {
 
   const alert = (isLoading === false && authResult === 'failed') ? 
     Alert.alert("Error", error, [
-      {text: "OK"}
+      {
+        text: "OK",
+        onPress: () => dispatch(resetAuthState())
+      }
     ]) : 
     (isLoading === false && authResult === 'success') ?
     Alert.alert("Recovery", "New password is sent to your email", [
-      {text: "OK", onPress: () => nav.navigate("Login")}
+      {
+        text: "OK", 
+        onPress: () => nav.navigate("Login")
+    }
     ]) : null;
 
   return(

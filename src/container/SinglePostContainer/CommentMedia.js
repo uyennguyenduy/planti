@@ -6,7 +6,7 @@ import { Spaces } from "../../theme/spacing";
 import { FontTheme } from "../../theme/fontTheme";
 
 export function CommentMedia({comment}) {
-  const author = USERS.filter(item => item.id === comment.userId)[0];
+
   return (
     <View style={styles.comment}>
       <Image 
@@ -14,7 +14,7 @@ export function CommentMedia({comment}) {
         source={require('../../assets/Images/user.png')}
       />
       <View style={styles.contentView}>
-        <Text style={styles.title}>{author.username.toLocaleUpperCase()}</Text>
+        <Text style={styles.title}>{comment.author}</Text>
         <Text style={styles.body}> {comment.content}</Text>
       </View>
     </View>

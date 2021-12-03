@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import {  View, Alert, TextInput, Text, TouchableOpacity, ImageBackground, ActivityIndicator} from 'react-native';
 import { styles } from '../../../theme/loginStyles';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginRequest } from '../../../redux/actions/authActions';
+import { loginRequest, resetAuthState } from '../../../redux/actions/authActions';
 import { selectAuthUser } from '../../../redux/reducers/authSlice';
 
 
@@ -63,7 +63,15 @@ export function LoginForm({nav}) {
     console.log(dispatch(loginRequest({email, password})))
   }
 
-  
+  const alert = (isLoading === false && authResult === 'failed') 
+    ? Alert.alert("Error Login", error, [
+        {
+          text: "OK",
+          onPress: () => dispatch(resetAuthState())
+        }
+      ]) 
+    : null
+   
 
   return(
    
@@ -104,9 +112,7 @@ export function LoginForm({nav}) {
         >
           <Text style={styles.textBody}>Forgot password?</Text>
         </TouchableOpacity>
-        {(isLoading === false && authResult === 'failed') ? Alert.alert("Error Login", error, [
-         {text: "OK"}]) : null
-        }
+        {alert}
     </View>
 
        

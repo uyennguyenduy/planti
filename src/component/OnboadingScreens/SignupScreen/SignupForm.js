@@ -6,13 +6,13 @@ import { useMemo } from 'react';
 import { useEffect } from 'react';
 import {  View, TextInput, Text, TouchableOpacity, ImageBackground, Alert, ActivityIndicator} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { signupRequest } from '../../../redux/actions/authActions';
+import { resetAuthState, signupRequest } from '../../../redux/actions/authActions';
 import { selectAuthUser } from '../../../redux/reducers/authSlice';
-import { signupUser } from '../../../service/authUser';
 import { styles } from '../../../theme/loginStyles';
-import { LoadingScreen } from '../../LoadingScreen';
+
 
 export function SignupForm({nav}) {
+
   const dispatch = useDispatch();
   const { isLoading, authResult, error } = useSelector(selectAuthUser);
   const [ data, setData ] = useState({
@@ -88,14 +88,20 @@ export function SignupForm({nav}) {
     return dispatch(signupRequest({email, password}))
   }
  
-    const alert = (isLoading === false && authResult === 'failed') ? 
-      Alert.alert("Error creating account", error, [
-        {text: "OK"}
-      ]) : 
+  const alert = (isLoading === false && authResult === 'failed') ? 
+    Alert.alert("Signup Error", error, [
+      { 
+        text: "OK", 
+        onPress: () => console.log(dispatch(resetAuthState()))
+      }
+    ]) : 
       (isLoading === false && authResult === 'success') ?
       Alert.alert("Signup", "Created successfully", [
-        {text: "OK", onPress: () => nav.navigate("Login")}
-      ]) : null
+        {
+          text: "OK", 
+          onPress: () => nav.navigate("Login")
+        }
+    ]) : null
 
 
   return(

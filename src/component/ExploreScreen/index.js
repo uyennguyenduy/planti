@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import { getPostsRequest } from '../../redux/actions/postsActions';
 import { getPlantsRequest } from '../../redux/actions/plantsActions';
 
+
 export function ExploreScreen({navigation}) {
 
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ export function ExploreScreen({navigation}) {
   useEffect(() => {
     dispatch(getPostsRequest())
     dispatch(getPlantsRequest())
-  }, []);
+  }, [dispatch]);
 
   return (
     <ScrollView style={styles.container} ref={ref}>

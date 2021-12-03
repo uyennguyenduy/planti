@@ -18,11 +18,12 @@ export function ExploreBody({nav}) {
 
   return (
     <View style={styles.exploreBodyView}>
+
       <RenderPost label="Plant Care"/>
         { isLoading ? <ActivityIndicator size="large"/> :
         <TouchableOpacity
           onPress={() => nav.navigate("PlantDetail", {
-            plantId: randomPlant.id
+            plantId: randomPlant?.id
           })}
           style={styles.plantWeekView}
         >
@@ -31,7 +32,7 @@ export function ExploreBody({nav}) {
             source={require('../../assets/Images/plant3.jpg')}
             resizeMode="contain"
           >
-            <Text style={styles.title}>{randomPlant.name}</Text>
+            <Text style={styles.title}>{randomPlant?.name}</Text>
             {/*<Text style={styles.subtitle}>{randomPlant.name}</Text>*/}
           </ImageBackground>
         </TouchableOpacity>

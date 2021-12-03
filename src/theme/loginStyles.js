@@ -66,7 +66,7 @@ export const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 15,
     borderRadius: 3,
-    backgroundColor: Colors.primary,
+    backgroundColor: Colors.dark,
     textAlign: 'center'
   },
   login: {
