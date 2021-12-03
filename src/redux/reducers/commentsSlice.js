@@ -36,10 +36,10 @@ export const commentsSlice = createSlice({
       }
     })
 
-    .addCase(addComment, (state, action) => {
-      console.log(action.payload)
-      state.allComments.push(action.payload);
-    })
+    // .addCase(addComment, (state, action) => {
+    //   console.log(action.payload)
+    //   state.allComments.push(action.payload);
+    // })
     // .addCase(addCommentSuccess, (state, action) => {
     //   return {
     //     isLoading: false

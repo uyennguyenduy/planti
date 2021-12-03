@@ -1,20 +1,24 @@
 import firestore from "@react-native-firebase/firestore"
+import { END, eventChannel } from '@redux-saga/core';
 
-// export const getCollection = (pathorRef) => {
-  
-//     return firestore().collection(pathorRef).onSnapshot(querySnapShot => {
-//       let collection = [];
-//       querySnapShot.forEach(doc => {
-//         collection.push({
-//           id: doc.id,
-//           ...doc.data()
-//         });
-//       });
-//       console.log(collection.length)
-//       return collection;
-//     })
-  
-// }
+export function subcribeToCollection(pathOrRef) {
+  return eventChannel(emitter => {
+
+    const subscribe = firestore().collection(pathOrRef).onSnapshot(querySnapshot => {
+    let  collection = [];
+    querySnapshot.forEach(doc => {
+      collection.push({
+        id: doc.id,
+        ...doc.data()
+      })
+    })
+      if (collection.length !== 0) {
+        emitter(collection)
+      } 
+    })
+    return () => subscribe
+  })
+}
 
 export const getCollection = (collection) => {
   return firestore().collection(collection).get();

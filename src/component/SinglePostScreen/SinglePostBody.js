@@ -20,7 +20,7 @@ export function SinglePostBody ({route}) {
   const allPosts = useSelector(selectAllPosts);
 
   const singlePost = allPosts.filter(post => post.id === postId)[0];
-  const singlePostComments = allComments?.filter(item => item.postId === "FJOelorivL0iDbXpJSkS");
+  const singlePostComments = allComments?.filter(item => item.postId === postId);
   
   return (
     <>
